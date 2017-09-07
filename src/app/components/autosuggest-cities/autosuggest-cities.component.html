@@ -1,0 +1,19 @@
+<br/>
+<md-card>
+  <md-toolbar color="primary">Autosuggest Cities</md-toolbar>
+  <br/>
+  <div class="row">
+    <div class="col-xs-6">
+      <md-form-field style="width:100%">
+        <input mdInput placeholder="Begin typing a city name" aria-label="City" [formControl]="cityControl" [mdAutocomplete]="autoCity">
+
+        <md-autocomplete #autoCity="mdAutocomplete">
+          <md-option *ngFor="let city of filteredCities | async" [value]="getCityDisplayName(city)">
+            {{getCityDisplayName(city)}}
+          </md-option>
+        </md-autocomplete>
+      </md-form-field>
+    </div>
+  </div>
+</md-card>
+

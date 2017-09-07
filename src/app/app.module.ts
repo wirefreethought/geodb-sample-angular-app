@@ -1,16 +1,54 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
-import { AppComponent } from './app.component';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+
+import { AppComponent } from "./app.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "@angular/material";
+import {RouterModule} from "@angular/router";
+import {GeoDataService} from "./domain/geo/geo-data.service";
+import {AuthInterceptor} from "./common/auth/auth.interceptor";
+
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+
+import {APP_ROUTES} from "./app.routing";
+
+import { AutosuggestCitiesComponent } from "./components/autosuggest-cities/autosuggest-cities.component";
+import { FindCitiesComponent } from "./components/find-cities/find-cities.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AutosuggestCitiesComponent,
+    FindCitiesComponent
   ],
   imports: [
-    BrowserModule
+    // Angular
+    BrowserModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(APP_ROUTES),
+
+    // Angular Material
+    MaterialModule,
+
+    // NGX
+    NgxDatatableModule
   ],
-  providers: [],
+  providers: [
+    GeoDataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

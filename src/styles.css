@@ -7,3 +7,21 @@
 
 @import url("http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css");
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+
+@import "~@swimlane/ngx-datatable/release/index.css";
+@import "~@swimlane/ngx-datatable/release/themes/material.css";
+@import "~@swimlane/ngx-datatable/release/assets/icons.css";
+
+/* Angular Material */
+mat-card {
+  margin: 16px;
+}
+
+mat-card-content {
+  display:flex;
+  flex-direction:row;
+  align-items: baseline;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 8px
+}
