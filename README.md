@@ -20,7 +20,7 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
 }
 
 ```
-4. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you **stay within the free usage limits** of the Basic plan, your credit card **will not be charged**.
+4. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you stay within the free usage limits of the Basic plan, your credit card will not be charged.
 5. [Subscribe](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) to the GeoDB basic plan.
 6. In **.env.json**, substitute YOUR_MASHAPE_KEY for the key assigned to you by Rapid.
 7. ```npm install```
