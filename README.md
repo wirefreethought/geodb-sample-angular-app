@@ -20,7 +20,8 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
 }
 
 ```
+3. ```npm install```
 
 ## Run
-1. From a shell window, go to the project root and type: ```npm start```
+1. ```npm start```
 3. Open your browser to: ```http://localhost:4200```
