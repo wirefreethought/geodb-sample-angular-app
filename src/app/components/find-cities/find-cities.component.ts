@@ -15,8 +15,8 @@ import {RestConstants} from "../../common/rest-constants.class";
 })
 export class FindCitiesComponent implements OnInit {
 
-  CITY_RESULTS_COLUMNS_NO_COUNTRY: Array<any> = [{name: "ID"}, {name: "City"}, {name: "Region"}];
-  CITY_RESULTS_COLUMNS: Array<any> = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: "Country"}];
+  CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: "ID"}, {name: "City"}, {name: "Region"}];
+  CITY_RESULTS_COLUMNS = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: "Country"}];
 
   countryControl: FormControl;
   allCountries: Country[];
@@ -43,7 +43,7 @@ export class FindCitiesComponent implements OnInit {
     this.minPopulationControl = new FormControl();
     this.minPopulationControl.disable();
 
-    this.refreshResults();
+    this.updateResults();
   }
 
   filterCountries(countryName: string) {
@@ -94,7 +94,7 @@ export class FindCitiesComponent implements OnInit {
         });
   }
 
-  refreshResults() {
+  updateResults() {
     this.setCityResultsPage(0);
   }
 }
