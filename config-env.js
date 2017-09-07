@@ -20,13 +20,13 @@ var stream = fs
 
 stream.on('finish', function() {
   // Set env variables in working environment.
-  var mashapeKey = env.mashape.key;
   var serviceEndpoint = env.service.endpoint;
+  var apiKey = env.service.apiKey;
 
   const options = {
     files: envWorkingFilePath,
-    from: [/{MASHAPE_KEY}/g, /{SERVICE_ENDPOINT}/g],
-    to: [mashapeKey, serviceEndpoint],
+    from: [/{SERVICE_ENDPOINT}/g, /{API_KEY}/g],
+    to: [serviceEndpoint, apiKey],
     allowEmptyPaths: false
   };
 

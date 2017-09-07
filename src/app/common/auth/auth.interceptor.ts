@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     const headers: HttpHeaders = request
       .headers
-        .set("X-Mashape-Key", environment.mashape.key);
+        .set("X-Mashape-Key", environment.service.apiKey);
 
     return next.handle(request.clone({headers: headers}));
   }

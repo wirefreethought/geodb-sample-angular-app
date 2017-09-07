@@ -17,8 +17,8 @@ export class GeoDataService {
   private countriesEndpoint: string;
 
   constructor(private httpClient: HttpClient) {
-    this.citiesEndpoint = environment.geoData.endpoint + "/v1/geo/cities";
-    this.countriesEndpoint = environment.geoData.endpoint + "/v1/geo/countries";
+    this.citiesEndpoint = environment.service.endpoint + "/v1/geo/cities";
+    this.countriesEndpoint = environment.service.endpoint + "/v1/geo/countries";
   }
 
   findCities(

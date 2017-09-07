@@ -12,10 +12,8 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
 ```
 {
   "service": {
-    "endpoint": "https://wft-geo-db.p.mashape.com"
-  },
-  "mashape": {
-    "key": "YOUR_MASHAPE_KEY"
+    "endpoint": "https://wft-geo-db.p.mashape.com",
+    "apiKey": "YOUR_MASHAPE_KEY"
   }
 }
 

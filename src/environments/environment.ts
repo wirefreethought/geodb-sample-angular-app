@@ -6,11 +6,8 @@
 export const environment = {
   production: false,
 
-  geoData: {
-    endpoint: "{SERVICE_ENDPOINT}"
-  },
-
-  mashape: {
-    key: "{MASHAPE_KEY}"
+  service: {
+    endpoint: "{SERVICE_ENDPOINT}",
+    apiKey: "{API_KEY}"
   }
 };
