@@ -6,6 +6,8 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
 1. Install [Node.js](https://nodejs.org/en/).
 2. Install [angular-cli](https://github.com/angular/angular-cli).
 3. ```npm install -g yargs@latest```
+4. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you stay within the free usage limits of the Basic plan, your credit card will not be charged.
+5. [Subscribe](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) to the GeoDB basic plan.
 
 ## Install
 1. ```git clone https://github.com/wirefreethought/geo-db-sample-angular-app.git```
@@ -19,11 +21,8 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
     "apiKey": "YOUR_MASHAPE_KEY"
   }
 }
-
 ```
-5. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you stay within the free usage limits of the Basic plan, your credit card will not be charged.
-6. [Subscribe](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) to the GeoDB basic plan.
-7. In **.env.json**, substitute YOUR_MASHAPE_KEY for the key assigned to you by Rapid.
+5. In **.env.json**, substitute YOUR_MASHAPE_KEY for the key assigned to you by Rapid.
 
 ## Run
 1. ```npm start```
