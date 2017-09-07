@@ -9,8 +9,9 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
 
 ## Install
 1. ```git clone https://github.com/wirefreethought/geo-db-sample-angular-app.git```
-2. Create a file called **.env.json** at the project root.
-3. Open **.env.json** for editing and paste in the following:
+2. ```npm install```
+3. Create a file called **.env.json** at the project root.
+4. Open **.env.json** for editing and paste in the following:
 ```
 {
   "service": {
@@ -20,10 +21,9 @@ This Angular app shows how much I enjoy eating my own geo dog food. Also, how yo
 }
 
 ```
-4. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you stay within the free usage limits of the Basic plan, your credit card will not be charged.
-5. [Subscribe](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) to the GeoDB basic plan.
-6. In **.env.json**, substitute YOUR_MASHAPE_KEY for the key assigned to you by Rapid.
-7. ```npm install```
+5. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you stay within the free usage limits of the Basic plan, your credit card will not be charged.
+6. [Subscribe](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) to the GeoDB basic plan.
+7. In **.env.json**, substitute YOUR_MASHAPE_KEY for the key assigned to you by Rapid.
 
 ## Run
 1. ```npm start```
