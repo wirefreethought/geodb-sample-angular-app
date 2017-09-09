@@ -1,25 +1,22 @@
-
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
+import {GeoDataService} from "../../domain/geo/geo-data.service";
+import {RestConstants} from "../../common/rest-constants.class";
 import {City} from "../../domain/geo/city.model";
 import {GeoResponse} from "../../domain/common/geo-response.model";
-import {Country} from "../../domain/geo/country.model";
-import {RestConstants} from "../../common/rest-constants.class";
-import {Component, OnInit} from "@angular/core";
-import {GeoDataService} from "../../domain/geo/geo-data.service";
 
 @Component({
-  selector: "app-search-cities-component",
-  templateUrl: "./find-cities.component.html",
-  styleUrls: ["./find-cities.component.css"]
+  selector: "app-find-region-cities",
+  templateUrl: "./find-region-cities.component.html",
+  styleUrls: ["./find-region-cities.component.css"]
 })
-export class FindCitiesComponent implements OnInit {
+export class FindRegionCitiesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: "ID"}, {name: "City"}, {name: "Region"}];
-  readonly CITY_RESULTS_COLUMNS = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: "Country"}];
+  readonly CITY_RESULTS_COLUMNS = [{name: "ID"}, {name: "City"}];
 
   countryCode: string;
+  regionCode: string;
 
-  cityControl: FormControl;
   minPopulationControl: FormControl;
 
   cityResultsColumns = [];
@@ -31,38 +28,31 @@ export class FindCitiesComponent implements OnInit {
   constructor(private geoDataService: GeoDataService) { }
 
   ngOnInit() {
-    this.cityControl = new FormControl();
-    this.cityControl.disable();
-
     this.minPopulationControl = new FormControl();
     this.minPopulationControl.disable();
-
-    this.updateResults();
   }
 
   onCountryCodeSelected(countryCode: string) {
     this.countryCode = countryCode;
+    this.regionCode = null;
   }
 
-  onCountryControlEnabled(enabled: boolean) {
-    if (!enabled) {
-      this.countryCode = null;
-    }
+  onRegionCodeSelected(regionCode: string) {
+    this.regionCode = regionCode;
   }
 
   setCityResultsPage(page: number) {
+    if (!this.countryCode || !this.regionCode) {
+      return;
+    }
+
     this.cityResultsCurrentPage = page;
 
     const offset = page * this.cityResultsPageSize;
 
-    const namePrefix = this.cityControl.enabled ? this.cityControl.value : null;
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
-    this.cityResultsColumns = this.countryCode
-      ? this.CITY_RESULTS_COLUMNS_NO_COUNTRY
-      : this.CITY_RESULTS_COLUMNS;
-
-    this.geoDataService.findCities(namePrefix, this.countryCode, minPopulation, this.cityResultsPageSize, offset)
+    this.geoDataService.findRegionCities(this.countryCode, this.regionCode, minPopulation, this.cityResultsPageSize, offset)
       .retry(RestConstants.MAX_RETRY)
       .subscribe(
         (response: GeoResponse<City[]>) => {

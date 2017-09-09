@@ -10,6 +10,7 @@ import {City} from "./city.model";
 import {GeoResponse} from "../common/geo-response.model";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Country} from "./country.model";
+import {Region} from "./region.model";
 
 @Injectable()
 export class GeoDataService {
@@ -69,9 +70,57 @@ export class GeoDataService {
     );
   }
 
+  findRegions(
+    countryCode: string,
+    limit: number,
+    offset: number): Observable<GeoResponse<Region[]>> {
+
+    const endpoint = this.buildRegionsEndpoint(countryCode);
+
+    const params: HttpParams = this.buildPagingParams(limit, offset);
+
+    return this.httpClient.get<GeoResponse<Region[]>>(
+      endpoint,
+      {
+        params: params
+      }
+    );
+  }
+
+  findRegionCities(
+    countryCode: string,
+    regionCode: string,
+    minCityPopulation: number,
+    limit: number,
+    offset: number): Observable<GeoResponse<City[]>> {
+
+    const endpoint = this.buildRegionEndpoint(countryCode, regionCode) + "/cities";
+
+    let params: HttpParams = this.buildPagingParams(limit, offset);
+
+    if (minCityPopulation) {
+      params = params.set("minPopulation", "" + minCityPopulation);
+    }
+
+    return this.httpClient.get<GeoResponse<City[]>>(
+      endpoint,
+      {
+        params: params
+      }
+    );
+  }
+
   private buildPagingParams(limit: number, offset: number): HttpParams {
     return new HttpParams()
       .set("offset", "" + offset)
       .set("limit", "" + limit);
+  }
+
+  private buildRegionEndpoint(countryCode: string, regionCode: string): string {
+    return this.buildRegionsEndpoint(countryCode) + "/" + regionCode;
+  }
+
+  private buildRegionsEndpoint(countryCode: string): string {
+    return this.countriesEndpoint + "/" + countryCode + "/regions";
   }
 }

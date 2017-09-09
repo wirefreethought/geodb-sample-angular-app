@@ -1,6 +1,6 @@
 <br/>
 <md-card>
-  <md-toolbar color="primary">Find Cities</md-toolbar>
+  <md-toolbar color="primary">Find Region Cities</md-toolbar>
   <br/>
   <div class="row">
     <div class="col-xs-12">
@@ -11,25 +11,16 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-xs-4">
-              <md-slide-toggle
-                [checked]="!cityControl.disabled"
-                (change)="cityControl.disabled ? cityControl.enable() : cityControl.disable()">
-              </md-slide-toggle>
-
-              <md-form-field>
-                <input mdInput placeholder="City Name Prefix" aria-label="City Name Prefix" [formControl]="cityControl">
-              </md-form-field>
-            </div>
-            <div class="col-xs-4">
-              <md-slide-toggle
-                [checked]="!countryControl.disabled"
-                (change)="onCountryControlEnabled(countryControl.toggleEnabled())">
-              </md-slide-toggle>
-
-              <app-country-control #countryControl
-                [enabled]="false"
+              <app-country-control
+                [enabled]="true"
                 (countryCode)="onCountryCodeSelected($event)">
               </app-country-control>
+            </div>
+            <div class="col-xs-4">
+              <app-region-control
+                [countryCode]="countryCode"
+                (regionCode)="onRegionCodeSelected($event)">
+              </app-region-control>
             </div>
             <div class="col-xs-4">
               <md-slide-toggle
@@ -44,7 +35,7 @@
           </div>
           <div class="row">
             <div class="col-xs-3">
-              <button md-raised-button (click)="updateResults()">Update Results</button>
+              <button md-raised-button (click)="updateResults()" [disabled]="!regionCode">Update Results</button>
             </div>
           </div>
         </div>
@@ -63,7 +54,7 @@
               <ngx-datatable
                 class="material"
                 [rows]="cityResultsCurrent"
-                [columns]="cityResultsColumns"
+                [columns]="CITY_RESULTS_COLUMNS"
                 [columnMode]="'force'"
                 [headerHeight]="40"
                 [footerHeight]="50"

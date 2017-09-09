@@ -1,0 +1,18 @@
+<md-form-field>
+  <input
+    mdInput
+    placeholder="Country"
+    aria-label="Country"
+    [mdAutocomplete]="autoCountry"
+    [formControl]="countryControl">
+
+  <md-autocomplete
+    #autoCountry="mdAutocomplete"
+    (optionSelected)="onCountrySelected($event.option.value)">
+
+    <md-option *ngFor="let country of filteredCountries | async" [value]="country.code">
+      {{country.code + ' - ' + country.name}}
+    </md-option>
+
+  </md-autocomplete>
+</md-form-field>

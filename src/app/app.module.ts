@@ -17,12 +17,18 @@ import {APP_ROUTES} from "./app.routing";
 
 import { AutosuggestCitiesComponent } from "./components/autosuggest-cities/autosuggest-cities.component";
 import { FindCitiesComponent } from "./components/find-cities/find-cities.component";
+import { FindRegionCitiesComponent } from './components/find-region-cities/find-region-cities.component';
+import { CountryControlComponent } from './components/common/country-control/country-control.component';
+import { RegionControlComponent } from './components/common/region-control/region-control.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AutosuggestCitiesComponent,
-    FindCitiesComponent
+    FindCitiesComponent,
+    FindRegionCitiesComponent,
+    CountryControlComponent,
+    RegionControlComponent
   ],
   imports: [
     // Angular
