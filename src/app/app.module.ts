@@ -6,7 +6,7 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MaterialModule} from "@angular/material";
+import {MaterialModule, MdAutocompleteModule} from "@angular/material";
 import {RouterModule} from "@angular/router";
 import {GeoDataService} from "./domain/geo/geo-data.service";
 import {AuthInterceptor} from "./common/auth/auth.interceptor";
@@ -20,6 +20,7 @@ import { FindCitiesComponent } from "./components/find-cities/find-cities.compon
 import { FindRegionCitiesComponent } from './components/find-region-cities/find-region-cities.component';
 import { CountryControlComponent } from './components/common/country-control/country-control.component';
 import { RegionControlComponent } from './components/common/region-control/region-control.component';
+import {AppMaterialModule} from "./app.material.module";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { RegionControlComponent } from './components/common/region-control/regio
     RouterModule.forRoot(APP_ROUTES),
 
     // Angular Material
-    MaterialModule,
+    AppMaterialModule,
 
     // NGX
     NgxDatatableModule
