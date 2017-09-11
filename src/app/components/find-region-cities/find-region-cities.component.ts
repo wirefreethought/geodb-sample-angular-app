@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
 import {GeoDataService} from "../../domain/geo/geo-data.service";
 import {RestConstants} from "../../common/rest-constants.class";
-import {City} from "../../domain/geo/city.model";
+import {CitySummary} from "../../domain/geo/city-summary.model";
 import {GeoResponse} from "../../domain/common/geo-response.model";
 
 @Component({
@@ -12,7 +12,7 @@ import {GeoResponse} from "../../domain/common/geo-response.model";
 })
 export class FindRegionCitiesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS = [{name: "ID"}, {name: "City"}];
+  readonly CITY_RESULTS_COLUMNS = [{name: "ID"}, {name: "CitySummary"}];
 
   countryCode: string;
   regionCode: string;
@@ -20,7 +20,7 @@ export class FindRegionCitiesComponent implements OnInit {
   minPopulationControl: FormControl;
 
   cityResultsColumns = [];
-  cityResultsCurrent = new Array<City>();
+  cityResultsCurrent = new Array<CitySummary>();
   cityResultsTotalCount = 0;
   cityResultsCurrentPage = 0;
   cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
@@ -55,7 +55,7 @@ export class FindRegionCitiesComponent implements OnInit {
     this.geoDataService.findRegionCities(this.countryCode, this.regionCode, minPopulation, this.cityResultsPageSize, offset)
       .retry(RestConstants.MAX_RETRY)
       .subscribe(
-        (response: GeoResponse<City[]>) => {
+        (response: GeoResponse<CitySummary[]>) => {
           this.cityResultsTotalCount = response.metadata.totalCount;
 
           this.cityResultsCurrent = [...response.data];

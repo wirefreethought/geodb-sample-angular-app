@@ -43,6 +43,38 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <md-slide-toggle
+                    [checked]="!nearLocationControlsDisabled"
+                    (change)="nearLocationControlsDisabled ? enableNearLocationControls() : disableNearLocationControls()">
+                  </md-slide-toggle>
+                  Near Location
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-xs-4">
+                      <md-form-field>
+                        <input mdInput placeholder="Latitude" aria-label="Latitude" [formControl]="nearLocationLatitudeControl">
+                      </md-form-field>
+                    </div>
+                    <div class="col-xs-4">
+                      <md-form-field>
+                        <input mdInput placeholder="Longitude" aria-label="Longitude" [formControl]="nearLocationLongitudeControl">
+                      </md-form-field>
+                    </div>
+                    <div class="col-xs-4">
+                      <md-form-field>
+                        <input mdInput type="number" placeholder="Radius (Miles)" aria-label="Radius (Miles)" [formControl]="nearLocationRadius">
+                      </md-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-xs-3">
               <button md-raised-button (click)="updateResults()">Update Results</button>
             </div>

@@ -22,18 +22,13 @@
   </md-sidenav>
 
   <md-toolbar color="primary">
-    <button class="app-icon-button" (click)="sidenav.toggle()">
-      <span class="material-icons app-toolbar-menu">menu</span>
+    <button md-icon-button (click)="sidenav.toggle()">
+      <md-icon>menu</md-icon>
     </button>
-
     GeoDB Sample App
-    &nbsp;
-    <span class="app-toolbar-filler"></span>
   </md-toolbar>
 
   <div class="container">
-
     <router-outlet></router-outlet>
-
   </div>
 </md-sidenav-container>

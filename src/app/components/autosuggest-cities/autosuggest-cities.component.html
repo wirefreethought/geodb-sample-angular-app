@@ -7,12 +7,33 @@
       <md-form-field style="width:100%">
         <input mdInput placeholder="Begin typing a city name" aria-label="City" [formControl]="cityControl" [mdAutocomplete]="autoCity">
 
-        <md-autocomplete #autoCity="mdAutocomplete">
-          <md-option *ngFor="let city of filteredCities | async" [value]="getCityDisplayName(city)">
+        <md-autocomplete
+          #autoCity="mdAutocomplete"
+          (optionSelected)="onCitySelected($event.option.value)"
+          [displayWith]="getCityDisplayName">
+          <md-option *ngFor="let city of filteredCities | async" [value]="city">
             {{getCityDisplayName(city)}}
           </md-option>
         </md-autocomplete>
       </md-form-field>
+    </div>
+    <div *ngIf="selectedCity != null" class="cols-xs-6">
+      <div class="col-xs-6">
+        <table width="100%">
+          <tr>
+            <th>ID</th>
+            <th>Location (lat, long)</th>
+            <th>Population</th>
+            <th>Elevation (meters)</th>
+          </tr>
+          <tr>
+            <td>{{selectedCity.id}}</td>
+            <td>{{selectedCity.location.latitude}}, {{selectedCity.location.longitude}}</td>
+            <td>{{selectedCity.population}}</td>
+            <td>{{selectedCity.elevationMeters ? selectedCity.elevationMeters : 'N/A'}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </md-card>

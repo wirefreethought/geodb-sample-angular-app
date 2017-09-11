@@ -59,6 +59,14 @@ export class CountryControlComponent implements OnInit {
     this.update();
   }
 
+  disable() {
+    if (this._enabled) {
+      this._enabled = false;
+
+      this.update();
+    }
+  }
+
   filterCountries(countryName: string) {
     const nameFilter: string = countryName.toLowerCase();
 

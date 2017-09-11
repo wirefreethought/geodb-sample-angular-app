@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
-import {City} from "../../domain/geo/city.model";
+import {CitySummary} from "../../domain/geo/city-summary.model";
 import {GeoDataService} from "../../domain/geo/geo-data.service";
 import {AutoSuggestConstants} from "../../common/autosuggest-constants.class";
 import {GeoResponse} from "../../domain/common/geo-response.model";
+import {CityDetails} from "../../domain/geo/city-details.model";
 
 @Component({
   selector: "app-autosuggest-cities",
@@ -15,18 +16,20 @@ export class AutosuggestCitiesComponent implements OnInit {
 
   private MIN_CITY_POPULATION = 25000;
 
+  selectedCity: CityDetails;
   cityControl: FormControl;
-  filteredCities: Observable<City[]>;
+  filteredCities: Observable<CitySummary[]>;
 
   constructor(private geoDataService: GeoDataService) { }
 
   ngOnInit() {
+
     this.cityControl = new FormControl();
 
     this.filteredCities = this.cityControl.valueChanges
       .startWith(null)
       .switchMap( (cityNamePrefix: string) => {
-        let citiesObservable: Observable<City[]> = Observable.of([]);
+        let citiesObservable: Observable<CitySummary[]> = Observable.of([]);
 
         if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
 
@@ -37,7 +40,7 @@ export class AutosuggestCitiesComponent implements OnInit {
             AutoSuggestConstants.MAX_SUGGESTIONS,
             0)
             .map(
-              (response: GeoResponse<City[]>) => {
+              (response: GeoResponse<CitySummary[]>) => {
                 return response.data;
               },
 
@@ -49,7 +52,12 @@ export class AutosuggestCitiesComponent implements OnInit {
       });
   }
 
-  getCityDisplayName(city: City) {
+  getCityDisplayName(city: CitySummary) {
+
+    if (!city) {
+      return null;
+    }
+
     let name = city.city;
 
     if (city.region) {
@@ -59,5 +67,14 @@ export class AutosuggestCitiesComponent implements OnInit {
     name += ", " + city.country;
 
     return name;
+  }
+
+  onCitySelected(city: CitySummary) {
+
+    this.geoDataService.findCityById(city.id)
+      .subscribe(
+        (response: GeoResponse<CityDetails>) => {
+          this.selectedCity = response.data;
+        });
   }
 }
