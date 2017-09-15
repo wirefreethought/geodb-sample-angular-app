@@ -9,7 +9,7 @@ This app shows how much I enjoy eating my own geo dog food. Also, how you might 
 2. Install [angular-cli](https://github.com/angular/angular-cli).
 3. ```npm install -g yargs@latest```
 4. Create an account on [RapidAPI](https://rapidapi.com). As part of account creation, Rapid asks for credit-card info. As long as you stay within the free usage limits of the Basic plan, your credit card will not be charged.
-5. [Subscribe](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) to a GeoDB plan.
+5. [Select](https://rapidapi.com/user/wirefreethought/package/GeoDB/pricing) a GeoDB plan.
 
 ## Install
 1. ```git clone https://github.com/wirefreethought/geo-db-sample-angular-app.git```
