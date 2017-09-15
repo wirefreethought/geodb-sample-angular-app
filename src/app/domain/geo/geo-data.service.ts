@@ -11,15 +11,12 @@ import {HttpClient, HttpParams, HttpUrlEncodingCodec} from "@angular/common/http
 import {Country} from "./country.model";
 import {Region} from "./region.model";
 import {NearLocationRequest} from "./near-location.request";
-import {QueryEncoder} from "@angular/http";
 import {CityDetails} from "./city-details.model";
 
 @Injectable()
 export class GeoDataService {
   private citiesEndpoint: string;
   private countriesEndpoint: string;
-
-  private queryEncoder = new QueryEncoder();
 
   constructor(private httpClient: HttpClient) {
     this.citiesEndpoint = environment.service.endpoint + "/v1/geo/cities";

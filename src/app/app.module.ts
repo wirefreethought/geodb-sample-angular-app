@@ -21,6 +21,7 @@ import { FindRegionCitiesComponent } from './components/find-region-cities/find-
 import { CountryControlComponent } from './components/common/country-control/country-control.component';
 import { RegionControlComponent } from './components/common/region-control/region-control.component';
 import {AppMaterialModule} from "./app.material.module";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
