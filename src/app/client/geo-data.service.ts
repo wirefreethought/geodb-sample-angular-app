@@ -1,17 +1,17 @@
-import "rxjs/Rx";
 import {Observable} from "rxjs/Observable";
+import "rxjs/Rx";
 
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 
-import {environment} from "../../../environments/environment";
+import {CityDetails} from "./model/city-details.model";
+import {CitySummary} from "./model/city-summary.model";
+import {Country} from "./model/country.model";
+import {GeoResponse} from "./model/geo-response.model";
+import {NearLocationRequest} from "./model/near-location.request";
+import {Region} from "./model/region.model";
 
-import {CitySummary} from "./city-summary.model";
-import {GeoResponse} from "../common/geo-response.model";
-import {HttpClient, HttpParams, HttpUrlEncodingCodec} from "@angular/common/http";
-import {Country} from "./country.model";
-import {Region} from "./region.model";
-import {NearLocationRequest} from "./near-location.request";
-import {CityDetails} from "./city-details.model";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class GeoDataService {

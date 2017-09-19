@@ -1,12 +1,15 @@
-import {FormControl} from "@angular/forms";
-import {CitySummary} from "../../domain/geo/city-summary.model";
-import {GeoResponse} from "../../domain/common/geo-response.model";
-import {Country} from "../../domain/geo/country.model";
-import {RestConstants} from "../../common/rest-constants.class";
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {GeoDataService} from "../../domain/geo/geo-data.service";
-import {CountryControlComponent} from "../common/country-control/country-control.component";
-import {NearLocationRequest} from "../../domain/geo/near-location.request";
+import {FormControl} from "@angular/forms";
+
+import {GeoDataService} from "../../client/geo-data.service";
+import {CitySummary} from "../../client/model/city-summary.model";
+import {Country} from "../../client/model/country.model";
+import {GeoResponse} from "../../client/model/geo-response.model";
+import {NearLocationRequest} from "../../client/model/near-location.request";
+
+import {CountryControlComponent} from "../../common/components/country-control/country-control.component";
+
+import {RestConstants} from "../../common/rest-constants.class";
 
 @Component({
   selector: "app-search-cities-component",

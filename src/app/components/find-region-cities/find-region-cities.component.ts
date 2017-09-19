@@ -1,9 +1,11 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {GeoDataService} from "../../domain/geo/geo-data.service";
+
+import {GeoDataService} from "../../client/geo-data.service";
+import {CitySummary} from "../../client/model/city-summary.model";
+import {GeoResponse} from "../../client/model/geo-response.model";
+
 import {RestConstants} from "../../common/rest-constants.class";
-import {CitySummary} from "../../domain/geo/city-summary.model";
-import {GeoResponse} from "../../domain/common/geo-response.model";
 
 @Component({
   selector: "app-find-region-cities",

@@ -1,11 +1,14 @@
 import {Component, Input, OnInit, Output} from "@angular/core";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {FormControl} from "@angular/forms";
-import {Region} from "../../../domain/geo/region.model";
+
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
-import {GeoDataService} from "../../../domain/geo/geo-data.service";
-import {RestConstants} from "../../../common/rest-constants.class";
-import {GeoResponse} from "../../../domain/common/geo-response.model";
+
+import {GeoDataService} from "../../../client/geo-data.service";
+import {GeoResponse} from "../../../client/model/geo-response.model";
+import {Region} from "../../../client/model/region.model";
+
+import {RestConstants} from "../../rest-constants.class";
 
 @Component({
   selector: "app-region-control",

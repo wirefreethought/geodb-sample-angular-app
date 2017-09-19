@@ -1,11 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
+
 import {Observable} from "rxjs/Observable";
-import {CitySummary} from "../../domain/geo/city-summary.model";
-import {GeoDataService} from "../../domain/geo/geo-data.service";
+
+import {GeoDataService} from "../../client/geo-data.service";
+import {CityDetails} from "../../client/model/city-details.model";
+import {CitySummary} from "../../client/model/city-summary.model";
+import {GeoResponse} from "../../client/model/geo-response.model";
+
 import {AutoSuggestConstants} from "../../common/autosuggest-constants.class";
-import {GeoResponse} from "../../domain/common/geo-response.model";
-import {CityDetails} from "../../domain/geo/city-details.model";
 
 @Component({
   selector: "app-autosuggest-cities",

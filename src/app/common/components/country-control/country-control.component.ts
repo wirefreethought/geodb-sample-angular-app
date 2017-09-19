@@ -1,13 +1,14 @@
 import {Component, Input, OnInit, Output} from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
+
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs/Observable";
 
-import {RestConstants} from "../../../common/rest-constants.class";
-import {GeoResponse} from "../../../domain/common/geo-response.model";
-import {Country} from "../../../domain/geo/country.model";
+import {GeoDataService} from "../../../client/geo-data.service";
+import {Country} from "../../../client/model/country.model";
+import {GeoResponse} from "../../../client/model/geo-response.model";
 
-import {GeoDataService} from "../../../domain/geo/geo-data.service";
+import {RestConstants} from "../../rest-constants.class";
 
 @Component({
   selector: "app-country-control",
