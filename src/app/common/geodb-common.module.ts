@@ -3,7 +3,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
-import {GeodbClientModule} from "../client/geodb-client.module";
+import {GeoDbClientModule} from "../client/geodb-client.module";
 
 import {AppMaterialModule} from "../app.material.module";
 
@@ -23,9 +23,12 @@ import {RegionControlComponent} from "./components/region-control/region-control
 
     // Our App
     AppMaterialModule,
-    GeodbClientModule
+    GeoDbClientModule
   ],
   exports: [
+    AppMaterialModule,
+    GeoDbClientModule,
+
     CountryControlComponent,
     RegionControlComponent
   ]

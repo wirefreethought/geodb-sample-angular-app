@@ -5,8 +5,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
-import {GeodbClientModule} from "./client/geodb-client.module";
-
 import {GeoDbCommonModule} from "./common/geodb-common.module";
 
 import {AutosuggestCitiesComponent} from "./components/autosuggest-cities/autosuggest-cities.component";
@@ -36,9 +34,7 @@ import {APP_ROUTES} from "./app.routing";
     NgxDatatableModule,
 
     // Our App
-    AppMaterialModule,
-    GeoDbCommonModule,
-    GeodbClientModule
+    GeoDbCommonModule
   ],
   bootstrap: [AppComponent]
 })

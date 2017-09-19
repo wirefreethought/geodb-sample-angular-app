@@ -17,6 +17,6 @@ import {GeoDataService} from "./geo-data.service";
     HttpClientModule
   ]
 })
-export class GeodbClientModule {
+export class GeoDbClientModule {
 
 }
