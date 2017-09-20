@@ -20,13 +20,13 @@ var stream = fs
 
 stream.on('finish', function() {
   // Set env variables in working environment.
-  var serviceEndpoint = env.service.endpoint;
   var apiKey = env.service.apiKey;
+  var serviceUri = env.service.uri;
 
   const options = {
     files: envWorkingFilePath,
-    from: [/{SERVICE_ENDPOINT}/g, /{API_KEY}/g],
-    to: [serviceEndpoint, apiKey],
+    from: [/{SERVICE_URI}/g, /{API_KEY}/g],
+    to: [serviceUri, apiKey],
     allowEmptyPaths: false
   };
 

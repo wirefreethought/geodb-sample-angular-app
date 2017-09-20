@@ -7,7 +7,7 @@ export const environment = {
   production: true,
 
   service: {
-    endpoint: "{SERVICE_ENDPOINT}",
-    apiKey: "{API_KEY}"
+    apiKey: "{API_KEY}",
+    uri: "{SERVICE_URI}"
   }
 };

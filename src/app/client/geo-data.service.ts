@@ -11,16 +11,16 @@ import {GeoResponse} from "./model/geo-response.model";
 import {NearLocationRequest} from "./model/near-location.request";
 import {Region} from "./model/region.model";
 
-import {environment} from "../../environments/environment";
+import {GeoClientConfig} from "./model/geo-client-config.model";
 
 @Injectable()
 export class GeoDataService {
   private citiesEndpoint: string;
   private countriesEndpoint: string;
 
-  constructor(private httpClient: HttpClient) {
-    this.citiesEndpoint = environment.service.endpoint + "/v1/geo/cities";
-    this.countriesEndpoint = environment.service.endpoint + "/v1/geo/countries";
+  constructor(private httpClient: HttpClient, private config: GeoClientConfig) {
+    this.citiesEndpoint = config.serviceUri + "/v1/geo/cities";
+    this.countriesEndpoint = config.serviceUri + "/v1/geo/countries";
   }
 
   findCityById(id: number): Observable<GeoResponse<CityDetails>> {
