@@ -1,4 +1,4 @@
-export class GeoClientConfig {
+export class GeoDbConfig {
   apiKey: string;
   serviceUri: string;
 }

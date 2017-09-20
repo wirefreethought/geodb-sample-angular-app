@@ -3,7 +3,7 @@ import {ModuleWithProviders, NgModule} from "@angular/core";
 
 import {AuthInterceptor} from "./auth.interceptor";
 import {GeoDataService} from "./geo-data.service";
-import {GeoClientConfig} from "./model/geo-client-config.model";
+import {GeoDbConfig} from "./model/geodb-config.model";
 
 @NgModule({
   providers: [
@@ -19,15 +19,15 @@ import {GeoClientConfig} from "./model/geo-client-config.model";
   ]
 })
 export class GeoDbClientModule {
-  static forRoot(config: GeoClientConfig): ModuleWithProviders {
+  static forRoot(config: GeoDbConfig): ModuleWithProviders {
     return {
       ngModule: GeoDbClientModule,
       providers: [
-        {provide: GeoClientConfig, useValue: config}
+        {provide: GeoDbConfig, useValue: config}
       ]
     };
   }
 
-  constructor(config: GeoClientConfig) {
+  constructor(config: GeoDbConfig) {
   }
 }

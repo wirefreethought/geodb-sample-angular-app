@@ -11,14 +11,14 @@ import {GeoResponse} from "./model/geo-response.model";
 import {NearLocationRequest} from "./model/near-location.request";
 import {Region} from "./model/region.model";
 
-import {GeoClientConfig} from "./model/geo-client-config.model";
+import {GeoDbConfig} from "./model/geodb-config.model";
 
 @Injectable()
 export class GeoDataService {
   private citiesEndpoint: string;
   private countriesEndpoint: string;
 
-  constructor(private httpClient: HttpClient, private config: GeoClientConfig) {
+  constructor(private httpClient: HttpClient, private config: GeoDbConfig) {
     this.citiesEndpoint = config.serviceUri + "/v1/geo/cities";
     this.countriesEndpoint = config.serviceUri + "/v1/geo/countries";
   }

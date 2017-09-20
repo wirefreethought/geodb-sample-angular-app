@@ -2,12 +2,12 @@ import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from 
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 
-import {GeoClientConfig} from "./model/geo-client-config.model";
+import {GeoDbConfig} from "./model/geodb-config.model";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private config: GeoClientConfig) {
+  constructor(private config: GeoDbConfig) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

@@ -10,7 +10,7 @@ import {AppMaterialModule} from "../app.material.module";
 import {CountryControlComponent} from "./components/country-control/country-control.component";
 import {RegionControlComponent} from "./components/region-control/region-control.component";
 
-import {GEO_CLIENT_CONFIG} from "./geodb-config";
+import {environment} from "../../environments/environment";
 
 @NgModule({
   declarations: [
@@ -25,7 +25,10 @@ import {GEO_CLIENT_CONFIG} from "./geodb-config";
 
     // Our App
     AppMaterialModule,
-    GeoDbClientModule.forRoot(GEO_CLIENT_CONFIG)
+    GeoDbClientModule.forRoot({
+      apiKey: environment.service.apiKey,
+      serviceUri: environment.service.uri
+    })
   ],
   exports: [
     AppMaterialModule,
