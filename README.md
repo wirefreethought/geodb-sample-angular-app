@@ -19,8 +19,8 @@ This app shows how much I enjoy eating my own geo dog food. Also, how you might 
 ```
 {
   "service": {
-    "endpoint": "https://wft-geo-db.p.mashape.com",
-    "apiKey": "YOUR_MASHAPE_KEY"
+    "apiKey": "YOUR_MASHAPE_KEY",
+    "uri": "https://wft-geo-db.p.mashape.com"    
   }
 }
 ```
