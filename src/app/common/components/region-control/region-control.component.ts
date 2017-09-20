@@ -25,7 +25,7 @@ export class RegionControlComponent implements OnInit {
   allRegions: Region[];
   filteredRegions: Observable<Region[]>;
 
-  constructor(private geoDataService: GeoDbService) { }
+  constructor(private geoDbService: GeoDbService) { }
 
   ngOnInit() {
     this.regionControl = new FormControl();
@@ -46,7 +46,7 @@ export class RegionControlComponent implements OnInit {
     this.regionControl.setValue(null);
 
     // We set a high limit to make sure we get all regions in a single call.
-    this.geoDataService.findRegions(countryCode, 1000, 0)
+    this.geoDbService.findRegions(countryCode, 1000, 0)
       .retry(RestConstants.MAX_RETRY)
       .do(
         (response: GeoResponse<Region[]>) => {

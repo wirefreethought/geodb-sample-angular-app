@@ -41,7 +41,7 @@ export class FindCitiesComponent implements OnInit {
 
   nearLocationControlsDisabled: boolean;
 
-  constructor(private geoDataService: GeoDbService) { }
+  constructor(private geoDbService: GeoDbService) { }
 
   ngOnInit() {
     this.cityControl = new FormControl();
@@ -102,7 +102,7 @@ export class FindCitiesComponent implements OnInit {
         this.cityResultsColumns = this.CITY_RESULTS_COLUMNS_NO_COUNTRY;
       }
 
-      this.geoDataService.findCities(namePrefix, this.countryCode, minPopulation, this.cityResultsPageSize, offset)
+      this.geoDbService.findCities(namePrefix, this.countryCode, minPopulation, this.cityResultsPageSize, offset)
         .retry(RestConstants.MAX_RETRY)
         .subscribe(
           (response: GeoResponse<CitySummary[]>) => {
@@ -119,7 +119,7 @@ export class FindCitiesComponent implements OnInit {
 
       console.log("near location request: " + JSON.stringify(nearLocationRequest));
 
-      this.geoDataService.findCitiesNearLocation(nearLocationRequest, namePrefix, minPopulation, this.cityResultsPageSize, offset)
+      this.geoDbService.findCitiesNearLocation(nearLocationRequest, namePrefix, minPopulation, this.cityResultsPageSize, offset)
         .retry(RestConstants.MAX_RETRY)
         .subscribe(
           (response: GeoResponse<CitySummary[]>) => {

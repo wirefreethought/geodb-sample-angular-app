@@ -27,7 +27,7 @@ export class FindRegionCitiesComponent implements OnInit {
   cityResultsCurrentPage = 0;
   cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
 
-  constructor(private geoDataService: GeoDbService) { }
+  constructor(private geoDbService: GeoDbService) { }
 
   ngOnInit() {
     this.minPopulationControl = new FormControl();
@@ -54,7 +54,7 @@ export class FindRegionCitiesComponent implements OnInit {
 
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
-    this.geoDataService.findRegionCities(this.countryCode, this.regionCode, minPopulation, this.cityResultsPageSize, offset)
+    this.geoDbService.findRegionCities(this.countryCode, this.regionCode, minPopulation, this.cityResultsPageSize, offset)
       .retry(RestConstants.MAX_RETRY)
       .subscribe(
         (response: GeoResponse<CitySummary[]>) => {

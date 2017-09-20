@@ -27,7 +27,7 @@ export class CountryControlComponent implements OnInit {
 
   private _enabled: boolean;
 
-  constructor(private geoDataService: GeoDbService) {
+  constructor(private geoDbService: GeoDbService) {
   }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class CountryControlComponent implements OnInit {
       .map(country => country ? this.filterCountries(country) : this.allCountries.slice());
 
     // We set a high limit to make sure we get all countries in a single call. This collection should be cached at app startup.
-    this.geoDataService.findCountries(null, 1000, 0)
+    this.geoDbService.findCountries(null, 1000, 0)
       .retry(RestConstants.MAX_RETRY)
       .do(
         (response: GeoResponse<Country[]>) => {

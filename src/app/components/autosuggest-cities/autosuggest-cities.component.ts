@@ -23,7 +23,7 @@ export class AutosuggestCitiesComponent implements OnInit {
   cityControl: FormControl;
   filteredCities: Observable<CitySummary[]>;
 
-  constructor(private geoDataService: GeoDbService) { }
+  constructor(private geoDbService: GeoDbService) { }
 
   ngOnInit() {
 
@@ -36,7 +36,7 @@ export class AutosuggestCitiesComponent implements OnInit {
 
         if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
 
-          citiesObservable = this.geoDataService.findCities(
+          citiesObservable = this.geoDbService.findCities(
             cityNamePrefix,
             null,
             this.MIN_CITY_POPULATION,
@@ -74,7 +74,7 @@ export class AutosuggestCitiesComponent implements OnInit {
 
   onCitySelected(city: CitySummary) {
 
-    this.geoDataService.findCityById(city.id)
+    this.geoDbService.findCityById(city.id)
       .subscribe(
         (response: GeoResponse<CityDetails>) => {
           this.selectedCity = response.data;
