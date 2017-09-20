@@ -14,7 +14,7 @@ import {Region} from "./model/region.model";
 import {GeoDbConfig} from "./model/geodb-config.model";
 
 @Injectable()
-export class GeoDataService {
+export class GeoDbService {
   private citiesEndpoint: string;
   private countriesEndpoint: string;
 

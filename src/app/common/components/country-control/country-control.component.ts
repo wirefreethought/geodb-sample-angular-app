@@ -4,7 +4,7 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-import {GeoDataService} from "../../../client/geo-data.service";
+import {GeoDbService} from "../../../client/geodb.service";
 import {Country} from "../../../client/model/country.model";
 import {GeoResponse} from "../../../client/model/geo-response.model";
 
@@ -27,7 +27,7 @@ export class CountryControlComponent implements OnInit {
 
   private _enabled: boolean;
 
-  constructor(private geoDataService: GeoDataService) {
+  constructor(private geoDataService: GeoDbService) {
   }
 
   ngOnInit() {

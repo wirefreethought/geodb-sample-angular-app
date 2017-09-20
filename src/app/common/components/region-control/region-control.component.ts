@@ -4,7 +4,7 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-import {GeoDataService} from "../../../client/geo-data.service";
+import {GeoDbService} from "../../../client/geodb.service";
 import {GeoResponse} from "../../../client/model/geo-response.model";
 import {Region} from "../../../client/model/region.model";
 
@@ -25,7 +25,7 @@ export class RegionControlComponent implements OnInit {
   allRegions: Region[];
   filteredRegions: Observable<Region[]>;
 
-  constructor(private geoDataService: GeoDataService) { }
+  constructor(private geoDataService: GeoDbService) { }
 
   ngOnInit() {
     this.regionControl = new FormControl();

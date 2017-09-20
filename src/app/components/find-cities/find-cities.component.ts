@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
 
-import {GeoDataService} from "../../client/geo-data.service";
+import {GeoDbService} from "../../client/geodb.service";
 import {CitySummary} from "../../client/model/city-summary.model";
 import {Country} from "../../client/model/country.model";
 import {GeoResponse} from "../../client/model/geo-response.model";
@@ -41,7 +41,7 @@ export class FindCitiesComponent implements OnInit {
 
   nearLocationControlsDisabled: boolean;
 
-  constructor(private geoDataService: GeoDataService) { }
+  constructor(private geoDataService: GeoDbService) { }
 
   ngOnInit() {
     this.cityControl = new FormControl();

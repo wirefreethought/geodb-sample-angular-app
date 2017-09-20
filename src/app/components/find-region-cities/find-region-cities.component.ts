@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
 
-import {GeoDataService} from "../../client/geo-data.service";
+import {GeoDbService} from "../../client/geodb.service";
 import {CitySummary} from "../../client/model/city-summary.model";
 import {GeoResponse} from "../../client/model/geo-response.model";
 
@@ -27,7 +27,7 @@ export class FindRegionCitiesComponent implements OnInit {
   cityResultsCurrentPage = 0;
   cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
 
-  constructor(private geoDataService: GeoDataService) { }
+  constructor(private geoDataService: GeoDbService) { }
 
   ngOnInit() {
     this.minPopulationControl = new FormControl();

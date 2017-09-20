@@ -3,7 +3,7 @@ import {FormControl} from "@angular/forms";
 
 import {Observable} from "rxjs/Observable";
 
-import {GeoDataService} from "../../client/geo-data.service";
+import {GeoDbService} from "../../client/geodb.service";
 import {CityDetails} from "../../client/model/city-details.model";
 import {CitySummary} from "../../client/model/city-summary.model";
 import {GeoResponse} from "../../client/model/geo-response.model";
@@ -23,7 +23,7 @@ export class AutosuggestCitiesComponent implements OnInit {
   cityControl: FormControl;
   filteredCities: Observable<CitySummary[]>;
 
-  constructor(private geoDataService: GeoDataService) { }
+  constructor(private geoDataService: GeoDbService) { }
 
   ngOnInit() {
 
