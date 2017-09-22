@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
 
-import {GeoDbService} from "../../client/geodb.service";
-import {CitySummary} from "../../client/model/city-summary.model";
-import {GeoResponse} from "../../client/model/geo-response.model";
+import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
+import {CitySummary} from "wft-geodb-angular-client/app/modules/geo-db/model/city-summary.model";
+import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
 
 import {RestConstants} from "../../common/rest-constants.class";
 

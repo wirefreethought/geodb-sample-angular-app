@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
 
-import {GeoDbService} from "../../client/geodb.service";
-import {CitySummary} from "../../client/model/city-summary.model";
-import {Country} from "../../client/model/country.model";
-import {GeoResponse} from "../../client/model/geo-response.model";
-import {NearLocationRequest} from "../../client/model/near-location.request";
-
 import {CountryControlComponent} from "../../common/components/country-control/country-control.component";
+
+import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
+import {CitySummary} from "wft-geodb-angular-client/app/modules/geo-db/model/city-summary.model";
+import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
+import {NearLocationRequest} from "wft-geodb-angular-client/app/modules/geo-db/model/near-location.request";
 
 import {RestConstants} from "../../common/rest-constants.class";
 

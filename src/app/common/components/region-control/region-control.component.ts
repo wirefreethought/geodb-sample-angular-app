@@ -4,9 +4,9 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-import {GeoDbService} from "../../../client/geodb.service";
-import {GeoResponse} from "../../../client/model/geo-response.model";
-import {Region} from "../../../client/model/region.model";
+import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
+import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
+import {RegionSummary} from "wft-geodb-angular-client/app/modules/geo-db/model/region-summary.model";
 
 import {RestConstants} from "../../rest-constants.class";
 
@@ -22,8 +22,8 @@ export class RegionControlComponent implements OnInit {
 
   regionControl: FormControl;
 
-  allRegions: Region[];
-  filteredRegions: Observable<Region[]>;
+  allRegions: RegionSummary[];
+  filteredRegions: Observable<RegionSummary[]>;
 
   constructor(private geoDbService: GeoDbService) { }
 
@@ -49,7 +49,7 @@ export class RegionControlComponent implements OnInit {
     this.geoDbService.findRegions(countryCode, 1000, 0)
       .retry(RestConstants.MAX_RETRY)
       .do(
-        (response: GeoResponse<Region[]>) => {
+        (response: GeoResponse<RegionSummary[]>) => {
           this.allRegions = response.data.slice();
         }
       )
@@ -62,7 +62,7 @@ export class RegionControlComponent implements OnInit {
     return this.allRegions.filter(region => region.name.toLowerCase().indexOf(nameFilter) === 0);
   }
 
-  getRegionCode(region: Region): string {
+  getRegionCode(region: RegionSummary): string {
     let code: string = region.hascCode;
 
     if (!code) {

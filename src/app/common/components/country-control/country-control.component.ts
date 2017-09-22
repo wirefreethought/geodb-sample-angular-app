@@ -4,9 +4,9 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-import {GeoDbService} from "../../../client/geodb.service";
-import {Country} from "../../../client/model/country.model";
-import {GeoResponse} from "../../../client/model/geo-response.model";
+import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
+import {CountrySummary} from "wft-geodb-angular-client/app/modules/geo-db/model/country-summary.model";
+import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
 
 import {RestConstants} from "../../rest-constants.class";
 
@@ -22,8 +22,8 @@ export class CountryControlComponent implements OnInit {
 
   countryControl = new FormControl();
 
-  allCountries: Country[];
-  filteredCountries: Observable<Country[]>;
+  allCountries: CountrySummary[];
+  filteredCountries: Observable<CountrySummary[]>;
 
   private _enabled: boolean;
 
@@ -41,7 +41,7 @@ export class CountryControlComponent implements OnInit {
     this.geoDbService.findCountries(null, 1000, 0)
       .retry(RestConstants.MAX_RETRY)
       .do(
-        (response: GeoResponse<Country[]>) => {
+        (response: GeoResponse<CountrySummary[]>) => {
           Array.prototype.push.apply(this.allCountries, response.data);
         }
       )
