@@ -2,12 +2,17 @@ import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
 
 import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/of";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/startWith";
+import "rxjs/add/operator/switchMap";
+
+import {GeoDbService} from "wft-geodb-angular-client";
+import {CityDetails} from "wft-geodb-angular-client/model/city-details.model";
+import {CitySummary} from "wft-geodb-angular-client/model/city-summary.model";
+import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
 
 import {AutoSuggestConstants} from "../../common/autosuggest-constants.class";
-import {CityDetails} from "wft-geodb-angular-client/app/modules/geo-db/model/city-details.model";
-import {CitySummary} from "wft-geodb-angular-client/app/modules/geo-db/model/city-summary.model";
-import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
-import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
 
 @Component({
   selector: "app-autosuggest-cities",

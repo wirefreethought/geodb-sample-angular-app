@@ -4,11 +4,12 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
-import {CountrySummary} from "wft-geodb-angular-client/app/modules/geo-db/model/country-summary.model";
-import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
 
 import {RestConstants} from "../../rest-constants.class";
+
+import {GeoDbService} from "wft-geodb-angular-client";
+import {CountrySummary} from "wft-geodb-angular-client/model/country-summary.model";
+import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
 
 @Component({
   selector: "app-country-control",

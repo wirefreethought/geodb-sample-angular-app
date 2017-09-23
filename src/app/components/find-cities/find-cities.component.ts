@@ -1,12 +1,15 @@
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/retry";
+
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
 
 import {CountryControlComponent} from "../../common/components/country-control/country-control.component";
 
-import {GeoDbService} from "wft-geodb-angular-client/app/modules/geo-db/geodb.service";
-import {CitySummary} from "wft-geodb-angular-client/app/modules/geo-db/model/city-summary.model";
-import {GeoResponse} from "wft-geodb-angular-client/app/modules/geo-db/model/geo-response.model";
-import {NearLocationRequest} from "wft-geodb-angular-client/app/modules/geo-db/model/near-location.request";
+import {GeoDbService} from "wft-geodb-angular-client";
+import {CitySummary} from "wft-geodb-angular-client/model/city-summary.model";
+import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
+import {NearLocationRequest} from "wft-geodb-angular-client/model/near-location.request";
 
 import {RestConstants} from "../../common/rest-constants.class";
 
@@ -17,7 +20,7 @@ import {RestConstants} from "../../common/rest-constants.class";
 })
 export class FindCitiesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: "ID"}, {name: "CitySummary"}, {name: "Region"}];
+  readonly CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: "ID"}, {name: "City"}, {name: "Region"}];
   readonly CITY_RESULTS_COLUMNS = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: "Country"}];
 
   @ViewChild("countryControl")
@@ -115,8 +118,6 @@ export class FindCitiesComponent implements OnInit {
         longitude: this.nearLocationLongitudeControl.value,
         radius: this.nearLocationRadius.value
       };
-
-      console.log("near location request: " + JSON.stringify(nearLocationRequest));
 
       this.geoDbService.findCitiesNearLocation(nearLocationRequest, namePrefix, minPopulation, this.cityResultsPageSize, offset)
         .retry(RestConstants.MAX_RETRY)
