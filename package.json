@@ -32,7 +32,7 @@
     "ngx-bootstrap": "^1.9.3",
     "npm": "^5.4.2",
     "rxjs": "^5.4.3",
-    "wft-geodb-angular-client": "file:../../clients/angular/dist/wft-geodb-angular-client-1.0.0.tgz",
+    "wft-geodb-angular-client": "^1.0.0",
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
