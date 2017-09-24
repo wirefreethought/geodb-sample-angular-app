@@ -40,12 +40,12 @@ export class AutosuggestCitiesComponent implements OnInit {
 
         if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
 
-          citiesObservable = this.geoDbService.findCities(
-            cityNamePrefix,
-            null,
-            this.MIN_CITY_POPULATION,
-            AutoSuggestConstants.MAX_SUGGESTIONS,
-            0)
+          citiesObservable = this.geoDbService.findCities({
+              namePrefix: cityNamePrefix,
+              minPopulation: this.MIN_CITY_POPULATION,
+              limit: AutoSuggestConstants.MAX_SUGGESTIONS,
+              offset: 0
+            })
             .map(
               (response: GeoResponse<CitySummary[]>) => {
                 return response.data;

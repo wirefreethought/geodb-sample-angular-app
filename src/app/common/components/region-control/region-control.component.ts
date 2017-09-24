@@ -4,11 +4,11 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-import {RestConstants} from "../../rest-constants.class";
-
 import {GeoDbService} from "wft-geodb-angular-client";
 import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
 import {RegionSummary} from "wft-geodb-angular-client/model/region-summary.model";
+
+import {RestConstants} from "../../rest-constants.class";
 
 @Component({
   selector: "app-region-control",
@@ -46,7 +46,11 @@ export class RegionControlComponent implements OnInit {
     this.regionControl.setValue(null);
 
     // We set a high limit to make sure we get all regions in a single call.
-    this.geoDbService.findRegions(countryCode, 1000, 0)
+    this.geoDbService.findRegions({
+        countryCode: countryCode,
+        limit: 1000,
+        offset: 0
+      })
       .retry(RestConstants.MAX_RETRY)
       .do(
         (response: GeoResponse<RegionSummary[]>) => {

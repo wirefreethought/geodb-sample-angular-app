@@ -14,7 +14,7 @@ import {RestConstants} from "../../common/rest-constants.class";
 })
 export class FindRegionCitiesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS = [{name: "ID"}, {name: "CitySummary"}];
+  readonly CITY_RESULTS_COLUMNS = [{name: "ID"}, {name: "City"}];
 
   countryCode: string;
   regionCode: string;
@@ -54,7 +54,13 @@ export class FindRegionCitiesComponent implements OnInit {
 
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
-    this.geoDbService.findRegionCities(this.countryCode, this.regionCode, minPopulation, this.cityResultsPageSize, offset)
+    this.geoDbService.findRegionCities({
+        countryCode: this.countryCode,
+        regionCode: this.regionCode,
+        minPopulation: minPopulation,
+        limit: this.cityResultsPageSize,
+        offset: offset
+      })
       .retry(RestConstants.MAX_RETRY)
       .subscribe(
         (response: GeoResponse<CitySummary[]>) => {

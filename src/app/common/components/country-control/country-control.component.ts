@@ -4,12 +4,11 @@ import {FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
-
-import {RestConstants} from "../../rest-constants.class";
-
 import {GeoDbService} from "wft-geodb-angular-client";
 import {CountrySummary} from "wft-geodb-angular-client/model/country-summary.model";
 import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
+
+import {RestConstants} from "../../rest-constants.class";
 
 @Component({
   selector: "app-country-control",
@@ -39,7 +38,10 @@ export class CountryControlComponent implements OnInit {
       .map(country => country ? this.filterCountries(country) : this.allCountries.slice());
 
     // We set a high limit to make sure we get all countries in a single call. This collection should be cached at app startup.
-    this.geoDbService.findCountries(null, 1000, 0)
+    this.geoDbService.findCountries({
+        limit: 1000,
+        offset: 0
+      })
       .retry(RestConstants.MAX_RETRY)
       .do(
         (response: GeoResponse<CountrySummary[]>) => {

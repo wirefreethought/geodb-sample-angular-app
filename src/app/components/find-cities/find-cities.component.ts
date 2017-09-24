@@ -9,7 +9,7 @@ import {CountryControlComponent} from "../../common/components/country-control/c
 import {GeoDbService} from "wft-geodb-angular-client";
 import {CitySummary} from "wft-geodb-angular-client/model/city-summary.model";
 import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
-import {NearLocationRequest} from "wft-geodb-angular-client/model/near-location.request";
+import {NearLocationRequest} from "wft-geodb-angular-client/model/request/near-location-request.model";
 
 import {RestConstants} from "../../common/rest-constants.class";
 
@@ -104,7 +104,13 @@ export class FindCitiesComponent implements OnInit {
         this.cityResultsColumns = this.CITY_RESULTS_COLUMNS_NO_COUNTRY;
       }
 
-      this.geoDbService.findCities(namePrefix, this.countryCode, minPopulation, this.cityResultsPageSize, offset)
+      this.geoDbService.findCities({
+          namePrefix: namePrefix,
+          countryCode: this.countryCode,
+          minPopulation: minPopulation,
+          limit: this.cityResultsPageSize,
+          offset: offset
+        })
         .retry(RestConstants.MAX_RETRY)
         .subscribe(
           (response: GeoResponse<CitySummary[]>) => {
@@ -116,10 +122,17 @@ export class FindCitiesComponent implements OnInit {
       const nearLocationRequest: NearLocationRequest = {
         latitude: this.nearLocationLatitudeControl.value,
         longitude: this.nearLocationLongitudeControl.value,
-        radius: this.nearLocationRadius.value
+        radius: this.nearLocationRadius.value,
+        radiusUnit: "MI"
       };
 
-      this.geoDbService.findCitiesNearLocation(nearLocationRequest, namePrefix, minPopulation, this.cityResultsPageSize, offset)
+      this.geoDbService.findCitiesNearLocation({
+          nearLocation: nearLocationRequest,
+          namePrefix: namePrefix,
+          minPopulation: minPopulation,
+          limit: this.cityResultsPageSize,
+          offset: offset
+        })
         .retry(RestConstants.MAX_RETRY)
         .subscribe(
           (response: GeoResponse<CitySummary[]>) => {
