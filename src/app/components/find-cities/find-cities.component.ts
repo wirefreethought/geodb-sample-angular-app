@@ -106,7 +106,9 @@ export class FindCitiesComponent implements OnInit {
 
       this.geoDbService.findCities({
           namePrefix: namePrefix,
-          countryCode: this.countryCode,
+          countryCodes: [
+            this.countryCode
+          ],
           minPopulation: minPopulation,
           limit: this.cityResultsPageSize,
           offset: offset
