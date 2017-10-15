@@ -1,6 +1,6 @@
 <br/>
-<md-card>
-  <md-toolbar color="primary">Find Region Cities</md-toolbar>
+<mat-card>
+  <mat-toolbar color="primary">Find Region Cities</mat-toolbar>
   <br/>
   <div class="row">
     <div class="col-xs-12">
@@ -23,19 +23,19 @@
               </app-region-control>
             </div>
             <div class="col-xs-4">
-              <md-slide-toggle
+              <mat-slide-toggle
                 [checked]="!minPopulationControl.disabled"
                 (change)="minPopulationControl.disabled ? minPopulationControl.enable() : minPopulationControl.disable()">
-              </md-slide-toggle>
+              </mat-slide-toggle>
 
-              <md-form-field>
-                <input mdInput type="number" min="1000" placeholder="Minimum City Population" aria-label="Minimum City Population" [formControl]="minPopulationControl">
-              </md-form-field>
+              <mat-form-field>
+                <input matInput type="number" min="1000" placeholder="Minimum City Population" aria-label="Minimum City Population" [formControl]="minPopulationControl">
+              </mat-form-field>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-3">
-              <button md-raised-button (click)="updateResults()" [disabled]="!regionCode">Update Results</button>
+              <button mat-raised-button (click)="updateResults()" [disabled]="!regionCode">Update Results</button>
             </div>
           </div>
         </div>
@@ -71,5 +71,5 @@
       </div>
     </div>
   </div>
-</md-card>
+</mat-card>
 

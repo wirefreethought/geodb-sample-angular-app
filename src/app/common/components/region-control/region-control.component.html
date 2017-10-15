@@ -1,17 +1,17 @@
-<md-form-field>
+<mat-form-field>
   <input
-    mdInput
+    matInput
     placeholder="Region"
     aria-label="Region"
-    [mdAutocomplete]="autoRegion"
+    [matAutocomplete]="autoRegion"
     [formControl]="regionControl">
 
-  <md-autocomplete
-    #autoRegion="mdAutocomplete"
+  <mat-autocomplete
+    #autoRegion="matAutocomplete"
     (optionSelected)="onRegionSelected($event.option.value)">
 
-    <md-option *ngFor="let region of filteredRegions | async" [value]="getRegionCode(region)">
+    <mat-option *ngFor="let region of filteredRegions | async" [value]="getRegionCode(region)">
       {{getRegionCode(region) + ' - ' + region.name}}
-    </md-option>
-  </md-autocomplete>
-</md-form-field>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

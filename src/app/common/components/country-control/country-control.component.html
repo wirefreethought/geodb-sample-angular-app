@@ -1,18 +1,18 @@
-<md-form-field>
+<mat-form-field>
   <input
-    mdInput
+    matInput
     placeholder="Country"
     aria-label="Country"
-    [mdAutocomplete]="autoCountry"
+    [matAutocomplete]="autoCountry"
     [formControl]="countryControl">
 
-  <md-autocomplete
-    #autoCountry="mdAutocomplete"
+  <mat-autocomplete
+    #autoCountry="matAutocomplete"
     (optionSelected)="onCountrySelected($event.option.value)">
 
-    <md-option *ngFor="let country of filteredCountries | async" [value]="country.code">
+    <mat-option *ngFor="let country of filteredCountries | async" [value]="country.code">
       {{country.code + ' - ' + country.name}}
-    </md-option>
+    </mat-option>
 
-  </md-autocomplete>
-</md-form-field>
+  </mat-autocomplete>
+</mat-form-field>

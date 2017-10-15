@@ -1,6 +1,6 @@
 <br/>
-<md-card>
-  <md-toolbar color="primary">Find Cities</md-toolbar>
+<mat-card>
+  <mat-toolbar color="primary">Find Cities</mat-toolbar>
   <br/>
   <div class="row">
     <div class="col-xs-12">
@@ -11,20 +11,20 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-xs-4">
-              <md-slide-toggle
+              <mat-slide-toggle
                 [checked]="!cityControl.disabled"
                 (change)="cityControl.disabled ? cityControl.enable() : cityControl.disable()">
-              </md-slide-toggle>
+              </mat-slide-toggle>
 
-              <md-form-field>
-                <input mdInput placeholder="City Name Prefix" aria-label="City Name Prefix" [formControl]="cityControl">
-              </md-form-field>
+              <mat-form-field>
+                <input matInput placeholder="City Name Prefix" aria-label="City Name Prefix" [formControl]="cityControl">
+              </mat-form-field>
             </div>
             <div class="col-xs-4">
-              <md-slide-toggle
+              <mat-slide-toggle
                 [checked]="!countryControl.disabled"
                 (change)="onCountryControlEnabled(countryControl.toggleEnabled())">
-              </md-slide-toggle>
+              </mat-slide-toggle>
 
               <app-country-control #countryControl
                 [enabled]="false"
@@ -32,42 +32,42 @@
               </app-country-control>
             </div>
             <div class="col-xs-4">
-              <md-slide-toggle
+              <mat-slide-toggle
                 [checked]="!minPopulationControl.disabled"
                 (change)="minPopulationControl.disabled ? minPopulationControl.enable() : minPopulationControl.disable()">
-              </md-slide-toggle>
+              </mat-slide-toggle>
 
-              <md-form-field>
-                <input mdInput type="number" min="1000" placeholder="Minimum City Population" aria-label="Minimum City Population" [formControl]="minPopulationControl">
-              </md-form-field>
+              <mat-form-field>
+                <input matInput type="number" min="1000" placeholder="Minimum City Population" aria-label="Minimum City Population" [formControl]="minPopulationControl">
+              </mat-form-field>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <md-slide-toggle
+                  <mat-slide-toggle
                     [checked]="!nearLocationControlsDisabled"
                     (change)="nearLocationControlsDisabled ? enableNearLocationControls() : disableNearLocationControls()">
-                  </md-slide-toggle>
+                  </mat-slide-toggle>
                   Near Location
                 </div>
                 <div class="panel-body">
                   <div class="row">
                     <div class="col-xs-4">
-                      <md-form-field>
-                        <input mdInput placeholder="Latitude" aria-label="Latitude" [formControl]="nearLocationLatitudeControl">
-                      </md-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Latitude" aria-label="Latitude" [formControl]="nearLocationLatitudeControl">
+                      </mat-form-field>
                     </div>
                     <div class="col-xs-4">
-                      <md-form-field>
-                        <input mdInput placeholder="Longitude" aria-label="Longitude" [formControl]="nearLocationLongitudeControl">
-                      </md-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Longitude" aria-label="Longitude" [formControl]="nearLocationLongitudeControl">
+                      </mat-form-field>
                     </div>
                     <div class="col-xs-4">
-                      <md-form-field>
-                        <input mdInput type="number" placeholder="Radius (Miles)" aria-label="Radius (Miles)" [formControl]="nearLocationRadius">
-                      </md-form-field>
+                      <mat-form-field>
+                        <input matInput type="number" placeholder="Radius (Miles)" aria-label="Radius (Miles)" [formControl]="nearLocationRadius">
+                      </mat-form-field>
                     </div>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="row">
             <div class="col-xs-3">
-              <button md-raised-button (click)="updateResults()">Update Results</button>
+              <button mat-raised-button (click)="updateResults()">Update Results</button>
             </div>
           </div>
         </div>
@@ -112,5 +112,5 @@
       </div>
     </div>
   </div>
-</md-card>
+</mat-card>
 

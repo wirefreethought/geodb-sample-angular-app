@@ -1,21 +1,21 @@
 <br/>
-<md-card>
-  <md-toolbar color="primary">Autosuggest Cities</md-toolbar>
+<mat-card>
+  <mat-toolbar color="primary">Autosuggest Cities</mat-toolbar>
   <br/>
   <div class="row">
     <div class="col-xs-6">
-      <md-form-field style="width:100%">
-        <input mdInput placeholder="Begin typing a city name" aria-label="City" [formControl]="cityControl" [mdAutocomplete]="autoCity">
+      <mat-form-field style="width:100%">
+        <input matInput placeholder="Begin typing a city name" aria-label="City" [formControl]="cityControl" [matAutocomplete]="autoCity">
 
-        <md-autocomplete
-          #autoCity="mdAutocomplete"
+        <mat-autocomplete
+          #autoCity="matAutocomplete"
           (optionSelected)="onCitySelected($event.option.value)"
           [displayWith]="getCityDisplayName">
-          <md-option *ngFor="let city of filteredCities | async" [value]="city">
+          <mat-option *ngFor="let city of filteredCities | async" [value]="city">
             {{getCityDisplayName(city)}}
-          </md-option>
-        </md-autocomplete>
-      </md-form-field>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
     <div *ngIf="selectedCity != null" class="cols-xs-6">
       <div class="col-xs-6">
@@ -36,5 +36,5 @@
       </div>
     </div>
   </div>
-</md-card>
+</mat-card>
 
