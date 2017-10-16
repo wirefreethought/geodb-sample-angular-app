@@ -19,6 +19,7 @@ import {CountryControlComponent} from "./common/components/country-control/count
 import {RegionControlComponent} from "./common/components/region-control/region-control.component";
 
 import {environment} from "../environments/environment";
+import { SetApiKeyComponent } from './components/set-api-key/set-api-key.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {environment} from "../environments/environment";
     CountryControlComponent,
     RegionControlComponent,
     FindCitiesComponent,
-    FindRegionCitiesComponent
+    FindRegionCitiesComponent,
+    SetApiKeyComponent
   ],
   imports: [
     // Angular

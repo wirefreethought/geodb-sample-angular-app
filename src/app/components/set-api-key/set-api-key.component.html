@@ -1,0 +1,28 @@
+<br/>
+<mat-card>
+  <mat-toolbar color="primary">Mashape API Key</mat-toolbar>
+  <br/>
+  <div class="row">
+    <div class="col-xs-12">
+      To get any of the demo examples to work, you must enter a valid Mashape API key . Entering a wrong key will not
+      cause an error here. But in this case when trying to run the demos, you will get HTTP 403 Forbidden errors in the
+      console log.
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-xs-12">
+      <form (ngSubmit)="onSetKey(f)" #f="ngForm">
+        <mat-form-field>
+          <input name="apiKey" matInput placeholder="Enter Mashape API Key" aria-label="API Key" ngModel>
+        </mat-form-field>
+        &nbsp;
+        <button mat-raised-button type="submit">Set Key</button>
+      </form>
+      <div *ngIf="apiKey != null && apiKey.length > 0">
+        <h4>Current Key</h4>
+        <pre>{{apiKey}}</pre>
+      </div>
+    </div>
+  </div>
+</mat-card>

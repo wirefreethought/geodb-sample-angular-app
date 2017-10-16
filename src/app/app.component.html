@@ -2,7 +2,13 @@
   <mat-sidenav #sidenav mode="side">
     <mat-nav-list>
       <a mat-list-item>
-        <mat-icon mat-list-icon [routerLink]="['home']">list</mat-icon>
+        <mat-icon mat-list-icon [routerLink]="['set-api-key']">vpn_key</mat-icon>
+        <span mat-line>Set API Key</span>
+        <span mat-line class="secondary">Set the API Key to use for the demo.</span>
+      </a>
+
+      <a mat-list-item>
+        <mat-icon mat-list-icon [routerLink]="['autosuggest-cities']">list</mat-icon>
         <span mat-line>Autosuggest Cities</span>
         <span mat-line class="secondary">Display city auto-suggestions as you type.</span>
       </a>
