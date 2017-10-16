@@ -18,11 +18,7 @@ export class SetApiKeyComponent implements OnInit {
   }
 
   get apiKey() {
-    const key = this.geoDbService.apiKey;
-
-    console.log("current key: " + key);
-
-    return key;
+    return this.geoDbService.apiKey;
   }
 
   onSetKey(form: NgForm) {
