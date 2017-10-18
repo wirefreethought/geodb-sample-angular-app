@@ -18,8 +18,9 @@ import {APP_ROUTES} from "./app.routing";
 import {CountryControlComponent} from "./common/components/country-control/country-control.component";
 import {RegionControlComponent} from "./common/components/region-control/region-control.component";
 
+import { SetApiKeyComponent } from "./components/set-api-key/set-api-key.component";
+
 import {environment} from "../environments/environment";
-import { SetApiKeyComponent } from './components/set-api-key/set-api-key.component';
 
 @NgModule({
   declarations: [

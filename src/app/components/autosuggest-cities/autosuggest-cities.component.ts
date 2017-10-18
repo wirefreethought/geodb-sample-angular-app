@@ -34,7 +34,6 @@ export class AutosuggestCitiesComponent implements OnInit {
     this.cityControl = new FormControl();
 
     this.filteredCities = this.cityControl.valueChanges
-      .startWith(null)
       .switchMap( (cityNamePrefix: string) => {
         let citiesObservable: Observable<CitySummary[]> = Observable.of([]);
 
