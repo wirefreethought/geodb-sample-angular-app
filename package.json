@@ -33,7 +33,7 @@
     "ngx-store": "^1.1.10",
     "npm": "^5.5.1",
     "rxjs": "^5.4.3",
-    "wft-geodb-angular-client": "^2.2.5",
+    "wft-geodb-angular-client": "^2.3.0",
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
