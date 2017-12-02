@@ -72,6 +72,7 @@ export class CountryControlComponent implements OnInit {
   }
 
   filterCountries(countryName: string) {
+
     const nameFilter: string = countryName.toLowerCase();
 
     return this.allCountries.filter(country => country.name.toLowerCase().indexOf(nameFilter) === 0);

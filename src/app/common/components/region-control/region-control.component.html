@@ -11,7 +11,7 @@
     (optionSelected)="onRegionSelected($event.option.value)">
 
     <mat-option *ngFor="let region of filteredRegions | async" [value]="getRegionCode(region)">
-      {{getRegionCode(region) + ' - ' + region.name}}
+      {{region.name}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

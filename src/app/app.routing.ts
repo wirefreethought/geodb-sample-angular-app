@@ -6,9 +6,9 @@ import {FindRegionCitiesComponent} from "./components/find-region-cities/find-re
 import {SetApiKeyComponent} from "./components/set-api-key/set-api-key.component";
 
 export const APP_ROUTES: Routes = [
-  {path: "", component: SetApiKeyComponent},
-  {path: "autosuggest-cities", component: AutosuggestCitiesComponent},
-  {path: "find-cities", component: FindCitiesComponent},
-  {path: "find-region-cities", component: FindRegionCitiesComponent},
-  {path: "set-api-key", component: SetApiKeyComponent}
+  {path: "", component: SetApiKeyComponent, pathMatch: "full"},
+  {path: "autosuggest-cities", component: AutosuggestCitiesComponent, pathMatch: "full"},
+  {path: "find-cities", component: FindCitiesComponent, pathMatch: "full"},
+  {path: "find-region-cities", component: FindRegionCitiesComponent, pathMatch: "full"},
+  {path: "set-api-key", component: SetApiKeyComponent, pathMatch: "full"}
 ];

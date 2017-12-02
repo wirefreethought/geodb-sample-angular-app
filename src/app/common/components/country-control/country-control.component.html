@@ -11,7 +11,7 @@
     (optionSelected)="onCountrySelected($event.option.value)">
 
     <mat-option *ngFor="let country of filteredCountries | async" [value]="country.code">
-      {{country.code + ' - ' + country.name}}
+      {{country.name}}
     </mat-option>
 
   </mat-autocomplete>
