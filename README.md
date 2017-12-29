@@ -18,7 +18,7 @@ This app shows how much I enjoy eating my own geo dog food. Also, how you might 
 {
   "service": {
     "apiKey": "",
-    "uri": "https://wft-geo-db.p.mashape.com"    
+    "uri": "http://geodb-free-service.wirefreethought.com"    
   }
 }
 ```
