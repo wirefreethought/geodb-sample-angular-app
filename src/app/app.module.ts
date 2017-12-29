@@ -5,7 +5,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
-import {GeoDbModule} from "wft-geodb-angular-client";
+import {GeoDbFreeModule} from "wft-geodb-angular-client";
 
 import {AutosuggestCitiesComponent} from "./components/autosuggest-cities/autosuggest-cities.component";
 import {FindCitiesComponent} from "./components/find-cities/find-cities.component";
@@ -18,8 +18,6 @@ import {APP_ROUTES} from "./app.routing";
 import {CountryControlComponent} from "./common/components/country-control/country-control.component";
 import {RegionControlComponent} from "./common/components/region-control/region-control.component";
 
-import { SetApiKeyComponent } from "./components/set-api-key/set-api-key.component";
-
 import {environment} from "../environments/environment";
 
 @NgModule({
@@ -29,8 +27,7 @@ import {environment} from "../environments/environment";
     CountryControlComponent,
     RegionControlComponent,
     FindCitiesComponent,
-    FindRegionCitiesComponent,
-    SetApiKeyComponent
+    FindRegionCitiesComponent
   ],
   imports: [
     // Angular
@@ -45,8 +42,8 @@ import {environment} from "../environments/environment";
 
     // Our App
     AppMaterialModule,
-    GeoDbModule.forRoot({
-      apiKey: environment.service.apiKey,
+    GeoDbFreeModule.forRoot({
+      apiKey: null,
       serviceUri: environment.service.uri
     })
   ],
