@@ -3,5 +3,5 @@ export class AutoSuggestConstants {
   public static readonly MIN_INPUT_LENGTH = 3;
 
   // The maximum number of auto-suggestions to list.
-  public static readonly MAX_SUGGESTIONS = 10;
+  public static readonly MAX_SUGGESTIONS = 5;
 }

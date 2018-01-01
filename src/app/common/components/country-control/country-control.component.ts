@@ -8,7 +8,7 @@ import {GeoDbService} from "wft-geodb-angular-client";
 import {CountrySummary} from "wft-geodb-angular-client/model/country-summary.model";
 import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
 
-import {RestConstants} from "../../rest-constants.class";
+import {AutoSuggestConstants} from "../../autosuggest-constants.class";
 
 @Component({
   selector: "app-country-control",
@@ -22,7 +22,6 @@ export class CountryControlComponent implements OnInit {
 
   countryControl = new FormControl();
 
-  allCountries: CountrySummary[];
   filteredCountries: Observable<CountrySummary[]>;
 
   private _enabled: boolean;
@@ -31,24 +30,29 @@ export class CountryControlComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.allCountries = [];
 
     this.filteredCountries = this.countryControl.valueChanges
-      .startWith(null)
-      .map(country => country ? this.filterCountries(country) : this.allCountries.slice());
+      .switchMap( (namePrefix: string) => {
+        let countriesObservable: Observable<CountrySummary[]> = Observable.of([]);
 
-    // We set a high limit to make sure we get all countries in a single call. This collection should be cached at app startup.
-    this.geoDbService.findCountries({
-        limit: 1000,
-        offset: 0
-      })
-      .retry(RestConstants.MAX_RETRY)
-      .do(
-        (response: GeoResponse<CountrySummary[]>) => {
-          Array.prototype.push.apply(this.allCountries, response.data);
+        if (namePrefix && namePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
+
+          countriesObservable = this.geoDbService.findCountries({
+            namePrefix: namePrefix,
+            limit: AutoSuggestConstants.MAX_SUGGESTIONS,
+            offset: 0
+          })
+            .map(
+              (response: GeoResponse<CountrySummary[]>) => {
+                return response.data;
+              },
+
+              (error: any) => console.log(error)
+            );
         }
-      )
-      .subscribe();
+
+        return countriesObservable;
+      });
   }
 
   @Output("disabled")
@@ -69,13 +73,6 @@ export class CountryControlComponent implements OnInit {
 
       this.update();
     }
-  }
-
-  filterCountries(countryName: string) {
-
-    const nameFilter: string = countryName.toLowerCase();
-
-    return this.allCountries.filter(country => country.name.toLowerCase().indexOf(nameFilter) === 0);
   }
 
   onCountrySelected(countryCode: string) {

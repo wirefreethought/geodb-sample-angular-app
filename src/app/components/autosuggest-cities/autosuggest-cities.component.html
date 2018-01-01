@@ -5,7 +5,12 @@
   <div class="row">
     <div class="col-xs-6">
       <mat-form-field style="width:100%">
-        <input matInput placeholder="Begin typing a city name" aria-label="City" [formControl]="cityControl" [matAutocomplete]="autoCity">
+        <input
+          matInput
+          placeholder="Begin typing a city name"
+          aria-label="City"
+          [formControl]="cityControl"
+          [matAutocomplete]="autoCity">
 
         <mat-autocomplete
           #autoCity="matAutocomplete"
