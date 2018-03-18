@@ -125,7 +125,7 @@ export class FindCitiesComponent implements OnInit {
         latitude: this.nearLocationLatitudeControl.value,
         longitude: this.nearLocationLongitudeControl.value,
         radius: this.nearLocationRadius.value,
-        radiusUnit: "MI"
+        distanceUnit: "MI"
       };
 
       this.geoDbService.findCitiesNearLocation({

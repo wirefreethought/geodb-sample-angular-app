@@ -42,6 +42,7 @@ export class AutosuggestCitiesComponent implements OnInit {
           citiesObservable = this.geoDbService.findCities({
               namePrefix: cityNamePrefix,
               minPopulation: this.MIN_CITY_POPULATION,
+              sortDirectives: ["-population"],
               limit: AutoSuggestConstants.MAX_SUGGESTIONS,
               offset: 0
             })
