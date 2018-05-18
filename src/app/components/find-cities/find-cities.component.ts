@@ -1,29 +1,28 @@
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/retry";
+import {retry} from 'rxjs/operators';
 
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormControl} from "@angular/forms";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
-import {CountryControlComponent} from "../../common/components/country-control/country-control.component";
+import {CountryControlComponent} from '../../common/components/country-control/country-control.component';
 
-import {GeoDbService} from "wft-geodb-angular-client";
-import {CitySummary} from "wft-geodb-angular-client/model/city-summary.model";
-import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
-import {NearLocationRequest} from "wft-geodb-angular-client/model/request/near-location-request.model";
+import {GeoDbService} from 'wft-geodb-angular-client';
 
-import {RestConstants} from "../../common/rest-constants.class";
+import {RestConstants} from '../../common/rest-constants.class';
+import {CitySummary} from 'wft-geodb-angular-client/lib/model/city-summary.model';
+import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
+import {NearLocationRequest} from 'wft-geodb-angular-client/lib/request/near-location-request.model';
 
 @Component({
-  selector: "app-search-cities-component",
-  templateUrl: "./find-cities.component.html",
-  styleUrls: ["./find-cities.component.css"]
+  selector: 'app-search-cities-component',
+  templateUrl: './find-cities.component.html',
+  styleUrls: ['./find-cities.component.css']
 })
 export class FindCitiesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: "ID"}, {name: "City"}, {name: "Region"}];
-  readonly CITY_RESULTS_COLUMNS = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: "Country"}];
+  readonly CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: 'ID'}, {name: 'City'}, {name: 'Region'}];
+  readonly CITY_RESULTS_COLUMNS = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: 'Country'}];
 
-  @ViewChild("countryControl")
+  @ViewChild('countryControl')
   countryControlComponent: CountryControlComponent;
 
   countryCode: string;
@@ -106,14 +105,16 @@ export class FindCitiesComponent implements OnInit {
 
       this.geoDbService.findCities({
           namePrefix: namePrefix,
-          countryCodes: [
+          countryIds: [
             this.countryCode
           ],
           minPopulation: minPopulation,
           limit: this.cityResultsPageSize,
           offset: offset
         })
-        .retry(RestConstants.MAX_RETRY)
+        .pipe(
+          retry(RestConstants.MAX_RETRY)
+        )
         .subscribe(
           (response: GeoResponse<CitySummary[]>) => {
             this.cityResultsTotalCount = response.metadata.totalCount;
@@ -125,17 +126,19 @@ export class FindCitiesComponent implements OnInit {
         latitude: this.nearLocationLatitudeControl.value,
         longitude: this.nearLocationLongitudeControl.value,
         radius: this.nearLocationRadius.value,
-        distanceUnit: "MI"
+        distanceUnit: 'MI'
       };
 
       this.geoDbService.findCitiesNearLocation({
-          nearLocation: nearLocationRequest,
+          location: nearLocationRequest,
           namePrefix: namePrefix,
           minPopulation: minPopulation,
           limit: this.cityResultsPageSize,
           offset: offset
         })
-        .retry(RestConstants.MAX_RETRY)
+        .pipe(
+          retry(RestConstants.MAX_RETRY)
+        )
         .subscribe(
           (response: GeoResponse<CitySummary[]>) => {
             this.cityResultsTotalCount = response.metadata.totalCount;

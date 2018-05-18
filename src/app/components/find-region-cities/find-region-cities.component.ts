@@ -1,20 +1,22 @@
-import {Component, OnInit} from "@angular/core";
-import {FormControl} from "@angular/forms";
+import {retry} from 'rxjs/operators';
 
-import {GeoDbService} from "wft-geodb-angular-client";
-import {CitySummary} from "wft-geodb-angular-client/model/city-summary.model";
-import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
-import {RestConstants} from "../../common/rest-constants.class";
+import {GeoDbService} from 'wft-geodb-angular-client';
+import {CitySummary} from 'wft-geodb-angular-client/lib/model/city-summary.model';
+import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
+
+import {RestConstants} from '../../common/rest-constants.class';
 
 @Component({
-  selector: "app-find-region-cities",
-  templateUrl: "./find-region-cities.component.html",
-  styleUrls: ["./find-region-cities.component.css"]
+  selector: 'app-find-region-cities',
+  templateUrl: './find-region-cities.component.html',
+  styleUrls: ['./find-region-cities.component.css']
 })
 export class FindRegionCitiesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS = [{name: "ID"}, {name: "City"}];
+  readonly CITY_RESULTS_COLUMNS = [{name: 'ID'}, {name: 'City'}];
 
   countryCode: string;
   regionCode: string;
@@ -55,13 +57,15 @@ export class FindRegionCitiesComponent implements OnInit {
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
     this.geoDbService.findRegionCities({
-        countryCode: this.countryCode,
+        countryId: this.countryCode,
         regionCode: this.regionCode,
         minPopulation: minPopulation,
         limit: this.cityResultsPageSize,
         offset: offset
       })
-      .retry(RestConstants.MAX_RETRY)
+      .pipe(
+        retry(RestConstants.MAX_RETRY)
+      )
       .subscribe(
         (response: GeoResponse<CitySummary[]>) => {
           this.cityResultsTotalCount = response.metadata.totalCount;

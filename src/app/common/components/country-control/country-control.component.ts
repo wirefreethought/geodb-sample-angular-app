@@ -1,23 +1,23 @@
-import {Component, Input, OnInit, Output} from "@angular/core";
-import {FormControl} from "@angular/forms";
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import { map, switchMap} from 'rxjs/operators';
 
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
-import {GeoDbService} from "wft-geodb-angular-client";
-import {CountrySummary} from "wft-geodb-angular-client/model/country-summary.model";
-import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
+import {GeoDbService} from 'wft-geodb-angular-client';
+import {CountrySummary} from 'wft-geodb-angular-client/lib/model/country-summary.model';
+import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
 
-import {AutoSuggestConstants} from "../../autosuggest-constants.class";
+import {AutoSuggestConstants} from '../../autosuggest-constants.class';
 
 @Component({
-  selector: "app-country-control",
-  templateUrl: "./country-control.component.html",
-  styleUrls: ["./country-control.component.css"]
+  selector: 'app-country-control',
+  templateUrl: './country-control.component.html',
+  styleUrls: ['./country-control.component.css']
 })
 export class CountryControlComponent implements OnInit {
 
-  @Output("countryCode")
+  @Output('countryCode')
   countryCodeSubject = new BehaviorSubject<string>(null);
 
   countryControl = new FormControl();
@@ -32,35 +32,38 @@ export class CountryControlComponent implements OnInit {
   ngOnInit() {
 
     this.filteredCountries = this.countryControl.valueChanges
-      .switchMap( (namePrefix: string) => {
-        let countriesObservable: Observable<CountrySummary[]> = Observable.of([]);
+      .pipe(
+        switchMap( (namePrefix: string) => {
+          let countriesObservable: Observable<CountrySummary[]> = of([]);
 
-        if (namePrefix && namePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
+          if (namePrefix && namePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
 
           countriesObservable = this.geoDbService.findCountries({
             namePrefix: namePrefix,
             limit: AutoSuggestConstants.MAX_SUGGESTIONS,
             offset: 0
           })
-            .map(
-              (response: GeoResponse<CountrySummary[]>) => {
-                return response.data;
-              },
+            .pipe(
+              map(
+                (response: GeoResponse<CountrySummary[]>) => {
+                  return response.data;
+                },
 
-              (error: any) => console.log(error)
+                (error: any) => console.log(error)
+              )
             );
         }
 
         return countriesObservable;
-      });
+      }));
   }
 
-  @Output("disabled")
+  @Output('disabled')
   get disabled() {
     return !this._enabled;
   }
 
-  @Input("enabled")
+  @Input('enabled')
   set enabled(enabled: boolean) {
     this._enabled = enabled;
 

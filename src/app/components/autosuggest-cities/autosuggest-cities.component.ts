@@ -1,23 +1,20 @@
-import {Component, OnInit} from "@angular/core";
-import {FormControl} from "@angular/forms";
+import {Observable, of} from 'rxjs';
+import { map, switchMap} from 'rxjs/operators';
 
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/startWith";
-import "rxjs/add/operator/switchMap";
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
-import {GeoDbService} from "wft-geodb-angular-client";
-import {CityDetails} from "wft-geodb-angular-client/model/city-details.model";
-import {CitySummary} from "wft-geodb-angular-client/model/city-summary.model";
-import {GeoResponse} from "wft-geodb-angular-client/model/geo-response.model";
+import {GeoDbService} from 'wft-geodb-angular-client';
+import {CityDetails} from 'wft-geodb-angular-client/lib/model/city-details.model';
+import {CitySummary} from 'wft-geodb-angular-client/lib/model/city-summary.model';
+import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
 
-import {AutoSuggestConstants} from "../../common/autosuggest-constants.class";
+import {AutoSuggestConstants} from '../../common/autosuggest-constants.class';
 
 @Component({
-  selector: "app-autosuggest-cities",
-  templateUrl: "./autosuggest-cities.component.html",
-  styleUrls: ["./autosuggest-cities.component.css"]
+  selector: 'app-autosuggest-cities',
+  templateUrl: './autosuggest-cities.component.html',
+  styleUrls: ['./autosuggest-cities.component.css']
 })
 export class AutosuggestCitiesComponent implements OnInit {
 
@@ -34,29 +31,33 @@ export class AutosuggestCitiesComponent implements OnInit {
     this.cityControl = new FormControl();
 
     this.filteredCities = this.cityControl.valueChanges
-      .switchMap( (cityNamePrefix: string) => {
-        let citiesObservable: Observable<CitySummary[]> = Observable.of([]);
+      .pipe(
+        switchMap( (cityNamePrefix: string) => {
+          let citiesObservable: Observable<CitySummary[]> = of([]);
 
-        if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
+          if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
 
-          citiesObservable = this.geoDbService.findCities({
+            citiesObservable = this.geoDbService.findCities({
               namePrefix: cityNamePrefix,
               minPopulation: this.MIN_CITY_POPULATION,
-              sortDirectives: ["-population"],
+              sortDirectives: ['-population'],
               limit: AutoSuggestConstants.MAX_SUGGESTIONS,
               offset: 0
             })
-            .map(
-              (response: GeoResponse<CitySummary[]>) => {
-                return response.data;
-              },
+              .pipe(
+                map(
+                  (response: GeoResponse<CitySummary[]>) => {
+                    return response.data;
+                  },
 
-              (error: any) => console.log(error)
-            );
-        }
+                  (error: any) => console.log(error)
+                )
+              );
+          }
 
-        return citiesObservable;
-      });
+          return citiesObservable;
+        })
+      );
   }
 
   getCityDisplayName(city: CitySummary) {
@@ -68,17 +69,19 @@ export class AutosuggestCitiesComponent implements OnInit {
     let name = city.city;
 
     if (city.region) {
-      name += ", " + city.region;
+      name += ', ' + city.region;
     }
 
-    name += ", " + city.country;
+    name += ', ' + city.country;
 
     return name;
   }
 
   onCitySelected(city: CitySummary) {
 
-    this.geoDbService.findCityById(city.id)
+    this.geoDbService.findCity({
+      cityId: city.id
+    })
       .subscribe(
         (response: GeoResponse<CityDetails>) => {
           this.selectedCity = response.data;
