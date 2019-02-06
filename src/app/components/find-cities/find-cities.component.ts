@@ -109,6 +109,7 @@ export class FindCitiesComponent implements OnInit {
             this.countryCode
           ],
           minPopulation: minPopulation,
+          types: ['CITY'],
           limit: this.cityResultsPageSize,
           offset: offset
         })

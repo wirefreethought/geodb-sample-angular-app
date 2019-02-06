@@ -60,6 +60,7 @@ export class FindRegionCitiesComponent implements OnInit {
         countryId: this.countryCode,
         regionCode: this.regionCode,
         minPopulation: minPopulation,
+        types: ['CITY'],
         limit: this.cityResultsPageSize,
         offset: offset
       })
