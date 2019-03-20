@@ -4,7 +4,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {GeoDbService} from 'wft-geodb-angular-client';
-import {CitySummary} from 'wft-geodb-angular-client/lib/model/city-summary.model';
+import {PlaceSummary} from 'wft-geodb-angular-client/lib/model/place-summary.model';
 import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
 
 import {RestConstants} from '../../common/rest-constants.class';
@@ -24,7 +24,7 @@ export class FindRegionCitiesComponent implements OnInit {
   minPopulationControl: FormControl;
 
   cityResultsColumns = [];
-  cityResultsCurrent = new Array<CitySummary>();
+  cityResultsCurrent = new Array<PlaceSummary>();
   cityResultsTotalCount = 0;
   cityResultsCurrentPage = 0;
   cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
@@ -56,7 +56,7 @@ export class FindRegionCitiesComponent implements OnInit {
 
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
-    this.geoDbService.findRegionCities({
+    this.geoDbService.findRegionPlaces({
         countryId: this.countryCode,
         regionCode: this.regionCode,
         minPopulation: minPopulation,
@@ -68,7 +68,7 @@ export class FindRegionCitiesComponent implements OnInit {
         retry(RestConstants.MAX_RETRY)
       )
       .subscribe(
-        (response: GeoResponse<CitySummary[]>) => {
+        (response: GeoResponse<PlaceSummary[]>) => {
           this.cityResultsTotalCount = response.metadata.totalCount;
 
           this.cityResultsCurrent = [...response.data];

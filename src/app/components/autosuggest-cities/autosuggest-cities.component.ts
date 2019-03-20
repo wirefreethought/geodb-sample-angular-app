@@ -5,8 +5,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {GeoDbService} from 'wft-geodb-angular-client';
-import {CityDetails} from 'wft-geodb-angular-client/lib/model/city-details.model';
-import {CitySummary} from 'wft-geodb-angular-client/lib/model/city-summary.model';
+import {PlaceDetails} from 'wft-geodb-angular-client/lib/model/place-details.model';
+import {PlaceSummary} from 'wft-geodb-angular-client/lib/model/place-summary.model';
 import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
 
 import {AutoSuggestConstants} from '../../common/autosuggest-constants.class';
@@ -20,9 +20,9 @@ export class AutosuggestCitiesComponent implements OnInit {
 
   private MIN_CITY_POPULATION = 25000;
 
-  selectedCity: CityDetails;
+  selectedCity: PlaceDetails;
   cityControl: FormControl;
-  filteredCities: Observable<CitySummary[]>;
+  filteredCities: Observable<PlaceSummary[]>;
 
   constructor(private geoDbService: GeoDbService) { }
 
@@ -33,11 +33,11 @@ export class AutosuggestCitiesComponent implements OnInit {
     this.filteredCities = this.cityControl.valueChanges
       .pipe(
         switchMap( (cityNamePrefix: string) => {
-          let citiesObservable: Observable<CitySummary[]> = of([]);
+          let citiesObservable: Observable<PlaceSummary[]> = of([]);
 
           if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
 
-            citiesObservable = this.geoDbService.findCities({
+            citiesObservable = this.geoDbService.findPlaces({
               namePrefix: cityNamePrefix,
               minPopulation: this.MIN_CITY_POPULATION,
               types: ['CITY'],
@@ -47,7 +47,7 @@ export class AutosuggestCitiesComponent implements OnInit {
             })
               .pipe(
                 map(
-                  (response: GeoResponse<CitySummary[]>) => {
+                  (response: GeoResponse<PlaceSummary[]>) => {
                     return response.data;
                   },
 
@@ -61,13 +61,13 @@ export class AutosuggestCitiesComponent implements OnInit {
       );
   }
 
-  getCityDisplayName(city: CitySummary) {
+  getCityDisplayName(city: PlaceSummary) {
 
     if (!city) {
       return null;
     }
 
-    let name = city.city;
+    let name = city.name;
 
     if (city.region) {
       name += ', ' + city.region;
@@ -78,13 +78,13 @@ export class AutosuggestCitiesComponent implements OnInit {
     return name;
   }
 
-  onCitySelected(city: CitySummary) {
+  onCitySelected(city: PlaceSummary) {
 
-    this.geoDbService.findCity({
-      cityId: city.id
+    this.geoDbService.findPlace({
+      placeId: city.id
     })
       .subscribe(
-        (response: GeoResponse<CityDetails>) => {
+        (response: GeoResponse<PlaceDetails>) => {
           this.selectedCity = response.data;
         });
   }

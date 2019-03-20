@@ -8,7 +8,7 @@ import {CountryControlComponent} from '../../common/components/country-control/c
 import {GeoDbService} from 'wft-geodb-angular-client';
 
 import {RestConstants} from '../../common/rest-constants.class';
-import {CitySummary} from 'wft-geodb-angular-client/lib/model/city-summary.model';
+import {PlaceSummary} from 'wft-geodb-angular-client/lib/model/place-summary.model';
 import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model';
 import {NearLocationRequest} from 'wft-geodb-angular-client/lib/request/near-location-request.model';
 
@@ -31,7 +31,7 @@ export class FindCitiesComponent implements OnInit {
   minPopulationControl: FormControl;
 
   cityResultsColumns = [];
-  cityResultsCurrent = new Array<CitySummary>();
+  cityResultsCurrent = new Array<PlaceSummary>();
   cityResultsTotalCount = 0;
   cityResultsCurrentPage = 0;
   cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
@@ -103,7 +103,7 @@ export class FindCitiesComponent implements OnInit {
         this.cityResultsColumns = this.CITY_RESULTS_COLUMNS_NO_COUNTRY;
       }
 
-      this.geoDbService.findCities({
+      this.geoDbService.findPlaces({
           namePrefix: namePrefix,
           countryIds: [
             this.countryCode
@@ -117,7 +117,7 @@ export class FindCitiesComponent implements OnInit {
           retry(RestConstants.MAX_RETRY)
         )
         .subscribe(
-          (response: GeoResponse<CitySummary[]>) => {
+          (response: GeoResponse<PlaceSummary[]>) => {
             this.cityResultsTotalCount = response.metadata.totalCount;
 
             this.cityResultsCurrent = [...response.data];
@@ -130,10 +130,11 @@ export class FindCitiesComponent implements OnInit {
         distanceUnit: 'MI'
       };
 
-      this.geoDbService.findCitiesNearLocation({
+      this.geoDbService.findPlacesNearLocation({
           location: nearLocationRequest,
           namePrefix: namePrefix,
           minPopulation: minPopulation,
+          types: ['CITY'],
           limit: this.cityResultsPageSize,
           offset: offset
         })
@@ -141,7 +142,7 @@ export class FindCitiesComponent implements OnInit {
           retry(RestConstants.MAX_RETRY)
         )
         .subscribe(
-          (response: GeoResponse<CitySummary[]>) => {
+          (response: GeoResponse<PlaceSummary[]>) => {
             this.cityResultsTotalCount = response.metadata.totalCount;
 
             this.cityResultsCurrent = [...response.data];
