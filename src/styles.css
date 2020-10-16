@@ -8,9 +8,9 @@
 @import url("http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css");
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 
-@import "~@swimlane/ngx-datatable/release/index.css";
-@import "~@swimlane/ngx-datatable/release/themes/material.css";
-@import "~@swimlane/ngx-datatable/release/assets/icons.css";
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/material.css";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
 
 /* Angular Material */
 mat-card {

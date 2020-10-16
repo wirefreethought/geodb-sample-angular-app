@@ -18,7 +18,7 @@ import {AutoSuggestConstants} from '../../common/autosuggest-constants.class';
 })
 export class AutosuggestCitiesComponent implements OnInit {
 
-  private MIN_CITY_POPULATION = 25000;
+  private MIN_CITY_POPULATION = 40000;
 
   selectedCity: PlaceDetails;
   cityControl: FormControl;
