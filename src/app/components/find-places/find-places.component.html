@@ -1,6 +1,6 @@
 <br/>
 <mat-card>
-  <mat-toolbar color="primary">Find Cities</mat-toolbar>
+  <mat-toolbar color="primary">Find Places</mat-toolbar>
   <br/>
   <div class="row">
     <div class="col-xs-12">
@@ -12,12 +12,12 @@
           <div class="row">
             <div class="col-xs-4">
               <mat-slide-toggle
-                [checked]="!cityControl.disabled"
-                (change)="cityControl.disabled ? cityControl.enable() : cityControl.disable()">
+                [checked]="!placeControl.disabled"
+                (change)="placeControl.disabled ? placeControl.enable() : placeControl.disable()">
               </mat-slide-toggle>
 
               <mat-form-field>
-                <input matInput placeholder="City Name Prefix" aria-label="City Name Prefix" [formControl]="cityControl">
+                <input matInput placeholder="Place Name Prefix" aria-label="Place Name Prefix" [formControl]="placeControl">
               </mat-form-field>
             </div>
             <div class="col-xs-4">
@@ -38,7 +38,7 @@
               </mat-slide-toggle>
 
               <mat-form-field>
-                <input matInput type="number" min="1000" placeholder="Minimum City Population" aria-label="Minimum City Population" [formControl]="minPopulationControl">
+                <input matInput type="number" min="1000" placeholder="Minimum Place Population" aria-label="Minimum Place Population" [formControl]="minPopulationControl">
               </mat-form-field>
             </div>
           </div>
@@ -94,17 +94,17 @@
             <div class="col-xs-12">
               <ngx-datatable
                 class="material"
-                [rows]="cityResultsCurrent"
-                [columns]="cityResultsColumns"
+                [rows]="placeResultsCurrent"
+                [columns]="placeResultsColumns"
                 [columnMode]="'force'"
                 [headerHeight]="40"
                 [footerHeight]="50"
                 [rowHeight]="'auto'"
                 [externalPaging]="true"
-                [count]="cityResultsTotalCount"
-                [offset]="cityResultsCurrentPage"
-                [limit]="cityResultsPageSize"
-                (page)='setCityResultsPage($event.offset)'>
+                [count]="placeResultsTotalCount"
+                [offset]="placeResultsCurrentPage"
+                [limit]="placeResultsPageSize"
+                (page)='setPlaceResultsPage($event.offset)'>
               </ngx-datatable>
             </div>
           </div>

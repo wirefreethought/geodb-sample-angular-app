@@ -1,53 +1,59 @@
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterModule} from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
-import {GeoDbFreeModule} from 'wft-geodb-angular-client';
-
-import {AutosuggestCitiesComponent} from './components/autosuggest-cities/autosuggest-cities.component';
-import {FindCitiesComponent} from './components/find-cities/find-cities.component';
-import {FindRegionCitiesComponent} from './components/find-region-cities/find-region-cities.component';
-
-import {AppComponent} from './app.component';
-import {AppMaterialModule} from './app.material.module';
-import {APP_ROUTES} from './app.routing';
-
+import { AppComponent } from './app.component';
 import {CountryControlComponent} from './common/components/country-control/country-control.component';
 import {RegionControlComponent} from './common/components/region-control/region-control.component';
+import { AppRoutingModule } from './app-routing.module';
+import {AppMaterialModule} from './app.material.module';
+import {GeoDbFreeModule} from 'wft-geodb-angular-client';
 
 import {environment} from '../environments/environment';
+import {FindRegionPlacesComponent} from './components/find-region-places/find-region-places.component';
+import {FindPlacesComponent} from './components/find-places/find-places.component';
+import {AutosuggestPlacesComponent} from './components/autosuggest-places/autosuggest-places.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AutosuggestCitiesComponent,
+
+    // Common
     CountryControlComponent,
     RegionControlComponent,
-    FindCitiesComponent,
-    FindRegionCitiesComponent
+
+    // App-Specific
+    AutosuggestPlacesComponent,
+    FindPlacesComponent,
+    FindRegionPlacesComponent
   ],
   imports: [
     // Angular
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(APP_ROUTES),
+
+    // Boostrap
+    NgbModule,
 
     // NGX
     NgxDatatableModule,
 
     // Our App
     AppMaterialModule,
+    AppRoutingModule,
     GeoDbFreeModule.forRoot({
-      apiKey: null,
+      apiKey: '',
       serviceUri: environment.service.uri
     })
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

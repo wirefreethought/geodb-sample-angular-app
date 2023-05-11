@@ -1,0 +1,20 @@
+@import 'bootstrap/scss/bootstrap';
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+/* Angular Material */
+mat-card {
+  margin: 16px;
+}
+
+mat-card-content {
+  display:flex;
+  flex-direction:row;
+  align-items: baseline;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 8px
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

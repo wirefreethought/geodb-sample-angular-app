@@ -10,24 +10,22 @@ import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model
 import {RestConstants} from '../../common/rest-constants.class';
 
 @Component({
-  selector: 'app-find-region-cities',
-  templateUrl: './find-region-cities.component.html',
-  styleUrls: ['./find-region-cities.component.css']
+  selector: 'app-find-region-places',
+  templateUrl: './find-region-places.component.html',
+  styleUrls: ['./find-region-places.component.css']
 })
-export class FindRegionCitiesComponent implements OnInit {
+export class FindRegionPlacesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS = [{name: 'ID'}, {name: 'City'}];
+  readonly PLACE_RESULTS_COLUMNS = [{name: 'ID'}, {name: 'Name'}];
 
   countryCode: string;
-  regionCode: string;
+  regionId: string | null;
 
   minPopulationControl: FormControl;
-
-  cityResultsColumns = [];
-  cityResultsCurrent = new Array<PlaceSummary>();
-  cityResultsTotalCount = 0;
-  cityResultsCurrentPage = 0;
-  cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
+  placeResultsCurrent = new Array<PlaceSummary>();
+  placeResultsTotalCount = 0;
+  placeResultsCurrentPage = 0;
+  placeResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
 
   constructor(private geoDbService: GeoDbService) { }
 
@@ -38,30 +36,29 @@ export class FindRegionCitiesComponent implements OnInit {
 
   onCountryCodeSelected(countryCode: string) {
     this.countryCode = countryCode;
-    this.regionCode = null;
+    this.regionId = null;
   }
 
-  onRegionCodeSelected(regionCode: string) {
-    this.regionCode = regionCode;
+  onRegionCodeSelected(regionId: string) {
+    this.regionId = regionId;
   }
 
-  setCityResultsPage(page: number) {
-    if (!this.countryCode || !this.regionCode) {
+  setPlaceResultsPage(page: number) {
+    if (!this.countryCode || !this.regionId) {
       return;
     }
 
-    this.cityResultsCurrentPage = page;
+    this.placeResultsCurrentPage = page;
 
-    const offset = page * this.cityResultsPageSize;
+    const offset = page * this.placeResultsPageSize;
 
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
     this.geoDbService.findRegionPlaces({
         countryId: this.countryCode,
-        regionCode: this.regionCode,
+        regionId: this.regionId,
         minPopulation: minPopulation,
-        types: ['CITY'],
-        limit: this.cityResultsPageSize,
+        limit: this.placeResultsPageSize,
         offset: offset
       })
       .pipe(
@@ -69,13 +66,13 @@ export class FindRegionCitiesComponent implements OnInit {
       )
       .subscribe(
         (response: GeoResponse<PlaceSummary[]>) => {
-          this.cityResultsTotalCount = response.metadata.totalCount;
+          this.placeResultsTotalCount = response.metadata.totalCount;
 
-          this.cityResultsCurrent = [...response.data];
+          this.placeResultsCurrent = [...response.data];
         });
   }
 
   updateResults() {
-    this.setCityResultsPage(0);
+    this.setPlaceResultsPage(0);
   }
 }

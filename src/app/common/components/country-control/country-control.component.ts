@@ -18,7 +18,7 @@ import {AutoSuggestConstants} from '../../autosuggest-constants.class';
 export class CountryControlComponent implements OnInit {
 
   @Output('countryCode')
-  countryCodeSubject = new BehaviorSubject<string>(null);
+  countryCodeSubject = new BehaviorSubject<string>('');
 
   countryControl = new FormControl();
 
@@ -47,9 +47,7 @@ export class CountryControlComponent implements OnInit {
               map(
                 (response: GeoResponse<CountrySummary[]>) => {
                   return response.data;
-                },
-
-                (error: any) => console.log(error)
+                }
               )
             );
         }

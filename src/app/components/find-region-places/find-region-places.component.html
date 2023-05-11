@@ -1,6 +1,6 @@
 <br/>
 <mat-card>
-  <mat-toolbar color="primary">Find Region Cities</mat-toolbar>
+  <mat-toolbar color="primary">Find Region Places</mat-toolbar>
   <br/>
   <div class="row">
     <div class="col-xs-12">
@@ -29,13 +29,13 @@
               </mat-slide-toggle>
 
               <mat-form-field>
-                <input matInput type="number" min="1000" placeholder="Minimum City Population" aria-label="Minimum City Population" [formControl]="minPopulationControl">
+                <input matInput type="number" min="1000" placeholder="Minimum Place Population" aria-label="Minimum Place Population" [formControl]="minPopulationControl">
               </mat-form-field>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-3">
-              <button mat-raised-button (click)="updateResults()" [disabled]="!regionCode">Update Results</button>
+              <button mat-raised-button (click)="updateResults()" [disabled]="!regionId">Update Results</button>
             </div>
           </div>
         </div>
@@ -53,17 +53,17 @@
             <div class="col-xs-12">
               <ngx-datatable
                 class="material"
-                [rows]="cityResultsCurrent"
-                [columns]="CITY_RESULTS_COLUMNS"
+                [rows]="placeResultsCurrent"
+                [columns]="PLACE_RESULTS_COLUMNS"
                 [columnMode]="'force'"
                 [headerHeight]="40"
                 [footerHeight]="50"
                 [rowHeight]="'auto'"
                 [externalPaging]="true"
-                [count]="cityResultsTotalCount"
-                [offset]="cityResultsCurrentPage"
-                [limit]="cityResultsPageSize"
-                (page)='setCityResultsPage($event.offset)'>
+                [count]="placeResultsTotalCount"
+                [offset]="placeResultsCurrentPage"
+                [limit]="placeResultsPageSize"
+                (page)='setPlaceResultsPage($event.offset)'>
               </ngx-datatable>
             </div>
           </div>

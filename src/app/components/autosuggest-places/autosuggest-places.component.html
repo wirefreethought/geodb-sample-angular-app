@@ -1,0 +1,45 @@
+<br/>
+<mat-card>
+  <mat-toolbar color="primary">Autosuggest Places</mat-toolbar>
+  <br/>
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field style="width:100%">
+        <input
+          matInput
+          placeholder="Begin typing a place name"
+          aria-label="Place"
+          [formControl]="placeControl"
+          [matAutocomplete]="autoPlace">
+
+        <mat-autocomplete
+          #autoPlace="matAutocomplete"
+          (optionSelected)="onPlaceSelected($event.option.value)"
+          [displayWith]="getPlaceDisplayName">
+          <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
+            {{getPlaceDisplayName(place)}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div *ngIf="selectedPlace != null" class="cols-xs-6">
+      <div class="col-xs-6">
+        <table style="width:100%">
+          <tr>
+            <th>ID</th>
+            <th>Location (lat, long)</th>
+            <th>Population</th>
+            <th>Elevation (meters)</th>
+          </tr>
+          <tr>
+            <td>{{selectedPlace.id}}</td>
+            <td>{{selectedPlace.latitude}}, {{selectedPlace.longitude}}</td>
+            <td>{{selectedPlace.population}}</td>
+            <td>{{selectedPlace.elevationMeters ? selectedPlace.elevationMeters : 'N/A'}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</mat-card>
+

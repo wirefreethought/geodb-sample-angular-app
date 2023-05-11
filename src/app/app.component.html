@@ -1,28 +1,28 @@
-<mat-sidenav-container fullscreen>
-  <mat-sidenav #sidenav mode="side">
+<mat-drawer-container>
+  <mat-drawer #drawer mode="side">
     <mat-nav-list>
       <a mat-list-item>
-        <mat-icon mat-list-icon [routerLink]="['autosuggest-cities']">list</mat-icon>
-        <span mat-line>Autosuggest Cities</span>
-        <span mat-line class="secondary">Display city auto-suggestions as you type.</span>
+        <mat-icon [routerLink]="['autosuggest-places']">list</mat-icon>
+        <span mat-line>Autosuggest Places</span>
+        <span mat-line class="secondary">Display place auto-suggestions as you type.</span>
       </a>
 
       <a mat-list-item>
-        <mat-icon mat-list-icon [routerLink]="['find-cities']">search</mat-icon>
-        <span mat-line>Find Cities</span>
-        <span mat-line class="secondary">Find cities using various constraints.</span>
+        <mat-icon [routerLink]="['find-places']">search</mat-icon>
+        <span mat-line>Find Places</span>
+        <span mat-line class="secondary">Find places using various constraints.</span>
       </a>
 
       <a mat-list-item>
-        <mat-icon mat-list-icon [routerLink]="['find-region-cities']">search</mat-icon>
-        <span mat-line>Find Region Cities</span>
-        <span mat-line class="secondary">Find cities for a specific country region.</span>
+        <mat-icon [routerLink]="['find-region-places']">search</mat-icon>
+        <span mat-line>Find Region Places</span>
+        <span mat-line class="secondary">Find places for a specific country region.</span>
       </a>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-drawer>
 
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     GeoDB Demo
@@ -31,4 +31,4 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
-</mat-sidenav-container>
+</mat-drawer-container>

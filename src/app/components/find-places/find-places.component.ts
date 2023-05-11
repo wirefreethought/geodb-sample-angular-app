@@ -13,28 +13,28 @@ import {GeoResponse} from 'wft-geodb-angular-client/lib/model/geo-response.model
 import {NearLocationRequest} from 'wft-geodb-angular-client/lib/request/near-location-request.model';
 
 @Component({
-  selector: 'app-search-cities-component',
-  templateUrl: './find-cities.component.html',
-  styleUrls: ['./find-cities.component.css']
+  selector: 'app-search-places-component',
+  templateUrl: './find-places.component.html',
+  styleUrls: ['./find-places.component.css']
 })
-export class FindCitiesComponent implements OnInit {
+export class FindPlacesComponent implements OnInit {
 
-  readonly CITY_RESULTS_COLUMNS_NO_COUNTRY = [{name: 'ID'}, {name: 'City'}, {name: 'Region'}];
-  readonly CITY_RESULTS_COLUMNS = [...this.CITY_RESULTS_COLUMNS_NO_COUNTRY, {name: 'Country'}];
+  readonly PLACE_RESULTS_COLUMNS_NO_COUNTRY = [{name: 'ID'}, {name: 'Name'}, {name: 'Region'}];
+  readonly PLACE_RESULTS_COLUMNS = [...this.PLACE_RESULTS_COLUMNS_NO_COUNTRY, {name: 'Country'}];
 
   @ViewChild('countryControl')
   countryControlComponent: CountryControlComponent;
 
   countryCode: string;
 
-  cityControl: FormControl;
+  placeControl: FormControl;
   minPopulationControl: FormControl;
 
-  cityResultsColumns = [];
-  cityResultsCurrent = new Array<PlaceSummary>();
-  cityResultsTotalCount = 0;
-  cityResultsCurrentPage = 0;
-  cityResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
+  placeResultsColumns: Array<{name:string}> = [];
+  placeResultsCurrent = new Array<PlaceSummary>();
+  placeResultsTotalCount = 0;
+  placeResultsCurrentPage = 0;
+  placeResultsPageSize = RestConstants.MAX_PAGING_LIMIT;
 
   nearLocationLatitudeControl: FormControl;
   nearLocationLongitudeControl: FormControl;
@@ -45,8 +45,8 @@ export class FindCitiesComponent implements OnInit {
   constructor(private geoDbService: GeoDbService) { }
 
   ngOnInit() {
-    this.cityControl = new FormControl();
-    this.cityControl.disable();
+    this.placeControl = new FormControl();
+    this.placeControl.disable();
 
     this.minPopulationControl = new FormControl();
     this.minPopulationControl.disable();
@@ -82,25 +82,25 @@ export class FindCitiesComponent implements OnInit {
 
   onCountryControlEnabled(enabled: boolean) {
     if (!enabled) {
-      this.countryCode = null;
+      this.countryCode = '';
     } else {
       this.disableNearLocationControls();
     }
   }
 
-  setCityResultsPage(page: number) {
-    this.cityResultsCurrentPage = page;
+  setPlaceResultsPage(page: number) {
+    this.placeResultsCurrentPage = page;
 
-    const offset = page * this.cityResultsPageSize;
+    const offset = page * this.placeResultsPageSize;
 
-    const namePrefix = this.cityControl.enabled ? this.cityControl.value : null;
+    const namePrefix = this.placeControl.enabled ? this.placeControl.value : null;
     const minPopulation = this.minPopulationControl.enabled ? this.minPopulationControl.value : null;
 
-    this.cityResultsColumns = this.CITY_RESULTS_COLUMNS;
+    this.placeResultsColumns = this.PLACE_RESULTS_COLUMNS;
 
     if (this.nearLocationControlsDisabled) {
       if (this.countryCode) {
-        this.cityResultsColumns = this.CITY_RESULTS_COLUMNS_NO_COUNTRY;
+        this.placeResultsColumns = this.PLACE_RESULTS_COLUMNS_NO_COUNTRY;
       }
 
       this.geoDbService.findPlaces({
@@ -109,8 +109,7 @@ export class FindCitiesComponent implements OnInit {
             this.countryCode
           ],
           minPopulation: minPopulation,
-          types: ['CITY'],
-          limit: this.cityResultsPageSize,
+          limit: this.placeResultsPageSize,
           offset: offset
         })
         .pipe(
@@ -118,9 +117,9 @@ export class FindCitiesComponent implements OnInit {
         )
         .subscribe(
           (response: GeoResponse<PlaceSummary[]>) => {
-            this.cityResultsTotalCount = response.metadata.totalCount;
+            this.placeResultsTotalCount = response.metadata.totalCount;
 
-            this.cityResultsCurrent = [...response.data];
+            this.placeResultsCurrent = [...response.data];
           });
     } else {
       const nearLocationRequest: NearLocationRequest = {
@@ -134,8 +133,7 @@ export class FindCitiesComponent implements OnInit {
           location: nearLocationRequest,
           namePrefix: namePrefix,
           minPopulation: minPopulation,
-          types: ['CITY'],
-          limit: this.cityResultsPageSize,
+          limit: this.placeResultsPageSize,
           offset: offset
         })
         .pipe(
@@ -143,14 +141,14 @@ export class FindCitiesComponent implements OnInit {
         )
         .subscribe(
           (response: GeoResponse<PlaceSummary[]>) => {
-            this.cityResultsTotalCount = response.metadata.totalCount;
+            this.placeResultsTotalCount = response.metadata.totalCount;
 
-            this.cityResultsCurrent = [...response.data];
+            this.placeResultsCurrent = [...response.data];
           });
     }
   }
 
   updateResults() {
-    this.setCityResultsPage(0);
+    this.setPlaceResultsPage(0);
   }
 }
