@@ -1,23 +1,23 @@
 <mat-drawer-container>
   <mat-drawer #drawer mode="side">
     <mat-nav-list>
-      <a mat-list-item>
-        <mat-icon [routerLink]="['autosuggest-places']">list</mat-icon>
-        <span mat-line>Autosuggest Places</span>
-        <span mat-line class="secondary">Display place auto-suggestions as you type.</span>
-      </a>
+      <mat-list-item>
+        <mat-icon [routerLink]="['autosuggest-places']" matListItemIcon>list</mat-icon>
+        <h4 matListItemTitle>Autosuggest Places</h4>
+        <p matListItemLine>Display place auto-suggestions as you type.</p>
+      </mat-list-item>
 
-      <a mat-list-item>
-        <mat-icon [routerLink]="['find-places']">search</mat-icon>
-        <span mat-line>Find Places</span>
-        <span mat-line class="secondary">Find places using various constraints.</span>
-      </a>
+      <mat-list-item>
+        <mat-icon [routerLink]="['find-places']" matListItemIcon>search</mat-icon>
+        <h4 matListItemTitle>Find Places</h4>
+        <p matListItemLine>Find places using various constraints.</p>
+      </mat-list-item>
 
-      <a mat-list-item>
-        <mat-icon [routerLink]="['find-region-places']">search</mat-icon>
-        <span mat-line>Find Region Places</span>
-        <span mat-line class="secondary">Find places for a specific country region.</span>
-      </a>
+      <mat-list-item>
+        <mat-icon [routerLink]="['find-region-places']" matListItemIcon>search</mat-icon>
+        <h4 matListItemTitle>Find Region Places</h4>
+        <p matListItemLine>Find places for a specific country region.</p>
+      </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
 

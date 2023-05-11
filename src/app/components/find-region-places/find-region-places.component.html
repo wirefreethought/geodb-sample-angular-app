@@ -1,75 +1,78 @@
 <br/>
 <mat-card>
-  <mat-toolbar color="primary">Find Region Places</mat-toolbar>
-  <br/>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Search Criteria</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-4">
-              <app-country-control
-                [enabled]="true"
-                (countryCode)="onCountryCodeSelected($event)">
-              </app-country-control>
-            </div>
-            <div class="col-xs-4">
-              <app-region-control
-                [countryCode]="countryCode"
-                (regionCode)="onRegionCodeSelected($event)">
-              </app-region-control>
-            </div>
-            <div class="col-xs-4">
-              <mat-slide-toggle
-                [checked]="!minPopulationControl.disabled"
-                (change)="minPopulationControl.disabled ? minPopulationControl.enable() : minPopulationControl.disable()">
-              </mat-slide-toggle>
+  <mat-card-header>
+    <mat-toolbar color="primary">Find Region Places</mat-toolbar>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Search Criteria</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-4">
+                <app-country-control
+                  [enabled]="true"
+                  (countryCode)="onCountryCodeSelected($event)">
+                </app-country-control>
+              </div>
+              <div class="col-xs-4">
+                <app-region-control
+                  [countryCode]="countryCode"
+                  (regionCode)="onRegionCodeSelected($event)">
+                </app-region-control>
+              </div>
+              <div class="col-xs-4">
+                <mat-slide-toggle
+                  [checked]="!minPopulationControl.disabled"
+                  (change)="minPopulationControl.disabled ? minPopulationControl.enable() : minPopulationControl.disable()">
+                </mat-slide-toggle>
 
-              <mat-form-field>
-                <input matInput type="number" min="1000" placeholder="Minimum Place Population" aria-label="Minimum Place Population" [formControl]="minPopulationControl">
-              </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="number" min="1000" placeholder="Minimum Place Population" aria-label="Minimum Place Population" [formControl]="minPopulationControl">
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3">
-              <button mat-raised-button (click)="updateResults()" [disabled]="!regionId">Update Results</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Results</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-12">
-              <ngx-datatable
-                class="material"
-                [rows]="placeResultsCurrent"
-                [columns]="PLACE_RESULTS_COLUMNS"
-                [columnMode]="'force'"
-                [headerHeight]="40"
-                [footerHeight]="50"
-                [rowHeight]="'auto'"
-                [externalPaging]="true"
-                [count]="placeResultsTotalCount"
-                [offset]="placeResultsCurrentPage"
-                [limit]="placeResultsPageSize"
-                (page)='setPlaceResultsPage($event.offset)'>
-              </ngx-datatable>
+            <div class="row">
+              <div class="col-xs-3">
+                <button mat-raised-button (click)="updateResults()" [disabled]="!regionId">Update Results</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Results</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <ngx-datatable
+                  class="material"
+                  [rows]="placeResultsCurrent"
+                  [columns]="PLACE_RESULTS_COLUMNS"
+                  [columnMode]="'force'"
+                  [headerHeight]="40"
+                  [footerHeight]="50"
+                  [rowHeight]="'auto'"
+                  [externalPaging]="true"
+                  [count]="placeResultsTotalCount"
+                  [offset]="placeResultsCurrentPage"
+                  [limit]="placeResultsPageSize"
+                  (page)='setPlaceResultsPage($event.offset)'>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>
 
